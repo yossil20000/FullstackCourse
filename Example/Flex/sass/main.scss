@@ -1,0 +1,210 @@
+// https://github.com/HugoGiraudel/sass-boilerplate.git
+$gap:4vh;
+$padding:4vh;
+$color: blue;
+$bp:(
+mobile:480px,
+tablet: 768px,
+desktop:144opx,
+);
+@mixin query($screen) {
+  @each $key , $value in $bp {
+    @if ($screen == $key) {
+      @media (max-width:$value) {
+        @content;
+      }
+    }
+  }
+}
+* {
+    padding: 0%;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  
+  * body {
+    font-family: sans-serif;
+    font-size: 3rem;
+    width: 100%;
+    min-height: 100vh;
+  
+  }
+.container{
+  display: flex;
+  flex-direction: column;
+  // to make the gap between lines
+  gap: $gap;
+  padding: $padding;
+  border: 1vh solid $color;
+  min-height: 100vh;
+}
+[class ^="block-s"]{
+  // border: 3px solid $color;
+  display: flex;
+  flex-direction: row;
+  
+  height: (100vh - $gap * 2 - $padding * 2 - 2vh) / 3;
+  
+  //height: (100vh ) / 3;
+  // to make gap between the boxes
+  gap: $gap;
+  @include query(mobile)
+  {
+    flex-direction: column;
+    height: 300px;
+  }
+}
+[class ^="box-s"]{
+   background-color: gray;
+   border: 2px solid black;
+   border-radius: 10px;
+  flex-grow: 1;
+  // sometimes not good if the content not equal can casue little different size
+  // therfore we can use flex-basis
+  flex-basis: (100%) /3 ; // pay atention that if you add gap the size will grow
+  //we can fix it by removig the gap from calculation
+  
+  // to set the letter in center
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+// Card Layout
+[class ^="group-cl-"]{
+  display: flex;
+  flex-direction: row;
+  height: (100vh - 2 * $padding - 2 * $gap - 2vh) / 3;
+  gap: $gap;
+}
+
+[class ^=box-cl-]
+{
+  display: flex;
+  border: 2px solid pink;
+  background-color: gray;
+
+  justify-content: center;
+  align-items: center;
+  
+}
+.box-cl-1{
+  flex-basis: (100%);
+}
+.box-cl-3 , .box-cl-4{
+  display: flex;
+  flex-basis: (30%);
+  
+}
+.box-cl-2 , .box-cl-5{
+  display: flex;
+  flex-basis: (70%);
+  
+}
+@include query(mobile)
+  {
+   .group-cl-2{
+     flex-direction: column;
+     height: 66.66vh;
+   }
+   .box-cl-4 , .box-cl-5 , .box-cl-2 , .box-cl-3{
+     flex-basis: 50%;
+   }
+   
+  }
+/*# sourceMappingURL=base.css.map */
+body{
+  overflow-x: hidden;
+}
+.container_responsive
+{
+  font-size: 1rem;
+  
+}
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: skyblue;
+  height: 10vh;
+  padding: 0 10px;
+  &__logo{
+    cursor: pointer;
+  }
+  &__btn{
+    display: none;
+  }
+  &__menu{
+    display: flex;
+    flex-direction: row;
+    [class ^="item-"]
+    {
+      padding-left: 15px;
+      cursor: pointer;
+    }
+  }
+}
+.main{
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+label:hover{
+  color: white;
+  cursor: pointer;
+}
+input[type="radio"]{
+  display: none;
+}
+input[type="radio"]:checked + label{
+  color: white;
+  text-decoration: underline;
+}
+@include query(tablet)
+{
+  
+.header{
+  justify-content: center;
+  &__logo{
+
+  }
+  &__btn{
+    display: flex;
+
+    position: absolute;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  &__menu{
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly ;
+    position: absolute;
+    right: 0px;
+    top: 10vh;
+    background-color: #c1c1c1;
+    width: 100%;
+    height: 90vh;
+    transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+}
+}
+
+}
+.hide{
+  display: none;
+}
+.slide{
+  right: -100%;
+  
+}
