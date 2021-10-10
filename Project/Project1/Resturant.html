@@ -7,16 +7,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- https://boxicons.com/usage#web-component -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"      rel="stylesheet">
+    <!-- https://www.svgrepo.com/vectors/fish/ -->
     <link rel="stylesheet" href="main.css">
     <title>Resturant</title>
 </head>
 <body>
     <div class="container">
 
+            coffee
+            </span>
 <!--     <i class='bx bx-user'></i>
 <i class='bx bxs-user'></i>
 <i class='bx bxl-facebook-square'></i> -->
-        <nav class="header navbar navbar-expend-lg navbar-light bg-light ">
+<!--         <nav class="header navbar navbar-expend-lg navbar-light bg-light ">
             <div class="header__logo navbar-brand">LOGO</div>
             <div class="header__menu" role="navigation">
                 <div class="header__menu-1">
@@ -43,10 +47,94 @@
             <div class="header__contact">
                 <button class="btn-alert">Contact</button>
             </div>
-        </nav>
+        </nav> -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Eatery</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Recipes</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Services
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">On Line Order</a></li>
+                      <li><a class="dropdown-item" href="#">Delivery </a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Specials </a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">News</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  
+                  <button class="btn btn-outline-success" type="submit">Contact us</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+
         <div class="main">
-            <div class="main__resurant"></div>
-            <div class="main__menu-groups"></div>
+            <div class="main__resurant row">
+                <img src="img/hero_1.jpg"  alt="">
+            </div>
+            <div class=" main__menu-groups row">
+                <div class="col-sm-3">
+                  <div class="card">
+                    <div class="card-body">
+                        <img src="/Project1/Icons/drink-svgrepo-com.svg" alt="Kiwi standing on oval">
+                      <h5 class="card-title">Special title treatment</h5>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="card">
+                    <div class="card-body">
+                        <img src="/Project1//Icons/fish-svgrepo-com.svg" alt="Kiwi standing on oval">
+                      <h5 class="card-title">Special title treatment</h5>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card">
+                      <div class="card-body">
+                          <img src="/Project1//Icons/coffee-svgrepo-com.svg" alt="Kiwi standing on oval">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="card">
+                      <div class="card-body">
+                          <img src="/Project1//Icons/salad-svgrepo-com.svg" alt="Kiwi standing on oval">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+
             <div class="main__menu--special"></div>
             <div class="main__menu"></div>
             <div class="main__testimonal"></div>
