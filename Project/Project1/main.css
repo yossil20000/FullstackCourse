@@ -1,0 +1,11 @@
+.main__menu_cards-img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: aliceblue;
+  width: 100px;
+}
+/*# sourceMappingURL=main.css.map */
