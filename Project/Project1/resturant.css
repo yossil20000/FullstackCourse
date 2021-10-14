@@ -1,0 +1,7 @@
+.main__bg-image {
+    background-image: url("./img/hero_2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 76vh;
+    
+  }
