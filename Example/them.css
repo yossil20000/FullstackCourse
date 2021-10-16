@@ -1,0 +1,25 @@
+.header{
+    background-color: transparent;
+    z-index: 1001;
+}
+.fixed-top{
+    top: 0;
+}
+.header .navbar-default.navbar{
+    padding: 18px 0;
+}
+.header .navbar-brand{
+    padding-top: 0;
+}
+.header .navbar-default.navbar .navbar-toggler .icon-bar{
+    background-color: #fff;
+    display: block;
+    height: 3px;
+    margin-top: 4px;
+    transition: all .2s;
+    width: 21px;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+}
