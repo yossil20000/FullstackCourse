@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <title>Calculator</title>
+</head>
+<body>
+    <div class="calculator">
+        <div class="calc__display">
+            <p id="calculator_result" class="calc__display"></p>
+            
+        </div>
+        <button value="1" class="c-input-1" onclick="displayBoard(value)">1</button>
+        <button value="2" class="c-input-2" onclick="displayBoard(value)">2</button>
+        <button value="3" class="c-input-3" onclick="displayBoard(value)">3</button>
+        <button value="*" class="c-input-mul" onclick="CalculatorMul(value)">*</button>
+        <button value="4" class="c-input-4" onclick="displayBoard(value)">4</button>
+        <button value="5" class="c-input-5" onclick="displayBoard(value)">5</button>
+        <button value="6" class="c-input-6" onclick="displayBoard(value)">6</button>
+        <button value="/" class="c-input-divide" onclick="CalculatorDivide(value)">/</button>
+        <button value="7" class="c-input-7" onclick="displayBoard(value)">7</button>
+        <button value="8" class="c-input-8" onclick="displayBoard(value)">8</button>
+        <button value="9" class="c-input-9" onclick="displayBoard(value)">9</button>
+        <button value="+" class="c-input-add" onclick="CalculatorAdd(value)">+</button>
+        <button value="0" class="c-input-0" onclick="displayBoard(value)">0</button>
+        <button value="c" class="c-input-clear" onclick="ClearResult()">C</button>
+        <button value="=" class="c-input-equal" onclick="CalculatorEqual(value)">=</button>
+        <button value="-" class="c-input-minus" onclick="CalculatorMinus(value)">-</button>
+        <button value="(" class="c-input-leftbracket" onclick="displayBoard(value)">(</button>
+        <button value=")" class="c-input-rightbracket" onclick="displayBoard(value)">)</button>
+        
+        <button value="bak" class="c-input-back" onclick="CalculatorBack()">back</button>
+    </div>
+<script src="calculator.js"></script>
+</body>
+</html>

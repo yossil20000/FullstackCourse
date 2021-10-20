@@ -1,0 +1,121 @@
+body{
+    display: flex;
+    padding: 0px;
+    
+    justify-content: center;
+}
+.calculator{
+    display: grid;
+    width: 95vw;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-areas: 
+    "c-display c-display c-display c-display"
+    "c-input-1 c-input-2 c-input-3 c-input-mul"
+    "c-input-4 c-input-5 c-input-6 c-input-divide"
+    "c-input-7 c-input-8 c-input-9 c-input-add"
+    "c-input-0 c-input-clear c-input-equal c-input-minus"
+    ". c-input-leftbracket c-input-rightbracket c-input-back"
+
+    ;
+    background-color: antiquewhite;
+    grid-gap: 5px;
+}
+.calc__display{
+    grid-area: c-display;
+    background-color: lightgray;
+    width: 100%;
+    text-align: right;
+    color: blue;
+    
+}
+.c-input-1{
+    grid-area: c-input-1;
+    background-color: rgb(158, 153, 153);
+}
+
+.c-input-2{
+    grid-area: c-input-2;
+    background-color: rgb(158, 153, 153);
+}
+.c-input-3{
+    grid-area: c-input-3;
+    background-color: rgb(158, 153, 153);
+}
+
+.c-input-mul{
+    grid-area: c-input-mul;
+    background-color: gray;
+    color: red;
+}
+.c-input-4{
+    grid-area: c-input-4;
+    background-color: rgb(158, 153, 153);
+}
+
+.c-input-5{
+    grid-area: c-input-5;
+    background-color: rgb(158, 153, 153);
+}
+.c-input-6{
+    grid-area: c-input-6;
+    background-color: rgb(158, 153, 153);
+}
+
+.c-input-divide{
+    grid-area: c-input-divide;
+    background-color: gray;
+    color: red;
+}
+
+.c-input-7{
+    grid-area: c-input-7;
+    background-color: rgb(158, 153, 153);
+}
+
+.c-input-8{
+    grid-area: c-input-8;
+    background-color: rgb(158, 153, 153);
+}
+.c-input-9{
+    grid-area: c-input-9;
+    background-color: rgb(158, 153, 153);
+}
+
+.c-input-add{
+    grid-area: c-input-add;
+    background-color: gray;
+    color: red;
+}
+
+.c-input-0{
+    grid-area: c-input-0;
+    background-color: rgb(158, 153, 153);
+}
+
+.c-input-clear{
+    grid-area: c-input-clear;
+    background-color: rgb(180, 23, 23);
+    text-decoration: underline;
+}
+.c-input-equal{
+    grid-area: c-input-equal;
+    background-color: gray;
+    color: red;
+}
+
+.c-input-minus{
+    grid-area: c-input-minus;
+    background-color: gray;
+    color: red;
+}
+.c-input-leftbracket{
+    grid-area: c-input-leftbracket;
+}
+.c-input-rightbracket{
+    grid-area: c-input-rightbracket;
+}
+.c-input-back{
+    grid-area: c-input-back;
+    background-color: red;
+    color:white;
+}
