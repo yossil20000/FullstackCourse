@@ -10,18 +10,11 @@
 <body>
     <div class="calculator">
         <div class="calc__display">
-            <p id="calculator_result" class="calc__display"></p>
+            <p id="calculator_result" class="calc__display">6</p>
             
-        </div>
-        <div class="c-input-d">
-            <p id="calculator_input-d" class="c-input-d"></p>
-            
-        </div>
-        <div class="c-operation-d">
-            <p class="c-operation-d" id="calculator_operation-d"></p>
         </div>
         <button value="1" class="c-input-1" onclick="displayBoard(value)">1</button>
-        <button value="2" class="c-input-2" onclick="displayBoard(value)">2</button>
+        
         <button value="3" class="c-input-3" onclick="displayBoard(value)">3</button>
         <button value="*" class="c-input-mul" onclick="CalculatorMul(value)">*</button>
         <button value="4" class="c-input-4" onclick="displayBoard(value)">4</button>
@@ -33,17 +26,11 @@
         <button value="9" class="c-input-9" onclick="displayBoard(value)">9</button>
         <button value="+" class="c-input-add" onclick="CalculatorAdd(value)">+</button>
         <button value="0" class="c-input-0" onclick="displayBoard(value)">0</button>
-        <button value="c" class="c-input-clear" onclick="ClearResult()">C</button>
+        <button value="c" class="c-input-clear" onclick="ClearResult(9)">C</button>
         <button value="=" class="c-input-equal" onclick="CalculatorEqual(value)">=</button>
         <button value="-" class="c-input-minus" onclick="CalculatorMinus(value)">-</button>
-        <button value="(" class="c-input-leftbracket" onclick="displayBoard(value)">(</button>
-        <button value=")" class="c-input-rightbracket" onclick="displayBoard(value)">)</button>
-        
-        <button value="bak" class="c-input-back" onclick="CalculatorBack()">back</button>
-        <button value="sqrt" class="c-input-sqrt" onclick="CalculatorMinus(value)">sqrt</button>
-        <button value="^" class="c-input-power" onclick="CalculatorPower(value)">^</button>
-        <button value="e" class="c-input-exponent" onclick="CalculatorMinus(value)">Exp</button>
+        <button value="2" class="c-input-2" onclick="displayBoard(value)">2</button>
     </div>
-<script src="Calculator.html"></script>
+<script src="calculator.js"></script>
 </body>
 </html>
