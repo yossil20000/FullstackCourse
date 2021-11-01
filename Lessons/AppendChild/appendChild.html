@@ -5,20 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="child.css">
+    <script defer src="child.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <div class="grid">
+<!--     <div class="grid">
         <div class="header">
             header
         </div>
         <div class="nav">Nav</div>
         <div class="main">Main</div>
-    </div>
+    </div> -->
     <button name="" onclick="createMenuItem()">Create Child</button>
     <input id="CreateChild"></input>
     <p id="menu">
     </p>
-    <script src="child.js"></script>
+    
+    <ul class="dc-overview">
+        <li>
+            <strong>"A"</strong>
+            <ul>
+                <li>A List item1</li>
+                <li>A list item 2</li>
+            </ul>
+        </li>
+        <li>
+            <strong>"B using<code>innerHTML</code>"</strong>
+            <ul>
+                <li>B easy to use and popular</li>
+                
+            </ul>
+        </li>
+        <li>Last original element</li>
+    </ul>
+    <!-- We can do the same with the defer key, this cause the scrip to load after the html is render -->
+    <!-- <script src="child.js"></script> -->
 </body>
 </html>
