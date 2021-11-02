@@ -14,5 +14,20 @@ console.log(imageContainer);
 infoContainer.className = "info-container";
 headingElement.className = "heading";
 paragraphElement.className = "paragraph";
-btnElement = "btn";
-// 
+imageElement.className ="image"
+btnElement.className="btn";
+//work the same away as the class name property except it set the source of the element;
+imageElement.src = "http://source.unsplash.com/random";
+btnElement.setAttribute("href","#");
+console.log(imageElement);
+//this set the value of the attribute element if exist then it updated
+btnElement.setAttribute("href","#");
+imageElement.setAttribute("alt","from Unsplash");
+headingElement.innerText="Unspalsh API";
+paragraphElement.innerText = "/this set the value of the attribute element if exist then it updated";
+btnElement.innerText="Learn More";
+bodyElement.appendChild(cardElement);
+//Apprn Multiple child
+cardElement.append(imageContainer,infoContainer);
+imageContainer.appendChild(imageElement);
+infoContainer.append(headingElement,paragraphElement,btnElement)

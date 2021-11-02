@@ -1,0 +1,52 @@
+body{
+    margin: 10px;
+    padding: 0%;
+}
+.lesson18Header{
+    display: flex;
+    background-color: aquamarine;
+    justify-content: center;
+    align-items: center;
+    
+}
+.listContainer{
+    display: grid;
+    height: 100vm;
+    width: 100vw;
+    grid-template-columns: 6ch 6ch 5fr 5ch;
+    grid-template-rows: auto;
+    grid-gap: 4px;
+    background-color: rgb(230, 170, 170);
+}
+.inputAddItem{
+    grid-column: 3 / -1;
+}
+.inputAddBtn{
+    display: flex;
+    justify-content: center;
+    grid-column: 1 / 3;
+    background-color: antiquewhite;
+}
+.itemIndex{
+    display: flex;
+    justify-content: center;
+    grid-column: 1;
+    background-color: bisque;
+    
+}
+.itemCeack{
+    display: flex;
+    justify-content: center;
+    grid-column: 2;
+    background-color: antiquewhite;
+}
+.itemTitle{
+    grid-column: 3;
+    background-color: antiquewhite;
+}
+.itemClose{
+    display: flex;
+    grid-column: 4;
+    background-color: antiquewhite;
+    justify-content: center;
+}
