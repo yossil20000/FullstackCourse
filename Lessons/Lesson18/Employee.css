@@ -1,0 +1,93 @@
+body{
+    margin: 10px;
+    padding: 0%;
+}
+.lesson18Header{
+    display: flex;
+    background-color: aquamarine;
+    justify-content: center;
+    align-items: center;
+    
+}
+.inputContainer{
+    display:grid;
+    width: 100vw;
+    grid-template-areas: 
+    "input-title input-title input-title input-title" 
+    "input-name input-age input-salary input-add ";
+}
+.input-title{
+    display: flex;
+    justify-content: space-around;
+    grid-area: input-title;
+}
+.input-name{
+    grid-area: input-name;
+    display: flex;
+    justify-content: space-around;
+}
+.input-age
+{
+    display: flex;
+    justify-content: space-around;
+    grid-area: input-age;
+}
+.input-salary{
+    display: flex;
+    justify-content: space-around;
+    grid-area: input-salary;
+}
+.input-add{
+    display: flex;
+    justify-content: space-around;
+    grid-area: input-add;
+}
+.listContainer{
+    display: grid;
+    
+    width: 100vw;
+    grid-template-columns: 5ch 1fr 10ch 10ch 10ch  ;
+    grid-template-rows: auto;
+    grid-gap: 4px;
+    background-color: rgb(230, 170, 170);
+}
+.inputAddItem{
+    grid-column: 2 / -1;
+}
+.inputAddBtn{
+    display: flex;
+    justify-content: center;
+    grid-column: 1 ;
+    background-color: antiquewhite;
+}
+.itemIndex{
+    display: flex;
+    justify-content: center;
+    grid-column: 1;
+    background-color: bisque;
+    
+}
+.itemTitle{
+    grid-column: 2 ;
+    background-color: rgb(148, 94, 23);
+}
+
+.itemAge{
+    display: flex;
+    justify-content: center;
+    grid-column: 3 ;
+    background-color: rgb(141, 14, 35);
+}
+
+.itemSalary{
+    display: flex;
+    grid-column: 4 ;
+    background-color: rgb(24, 170, 80);
+    justify-content: center;
+}
+.itemAction{
+    display: flex;
+    grid-column: 5 ;
+    background-color: rgb(250, 215, 236);
+    justify-content: center;
+}
