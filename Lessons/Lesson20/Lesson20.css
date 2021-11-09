@@ -1,0 +1,11 @@
+.container , .inputsData{
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    width: 100v;
+    justify-content: center;
+    align-items:center;
+}
+.inputsData{
+    flex-direction: row;
+}
