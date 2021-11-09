@@ -1,29 +1,46 @@
+
+
 class CNote{
     id;
     date;
-    note;
-    constructor(date,note)
+    message;
+    title;
+    constructor(date,title,message)
     {
         this.date = date;
-        this.note = note;
+        this.title = title ;
+        this.message = message;
     }
 }
-
-class CNotes{
-    notes = new Array();
-
-    constructor(id,name)
-    {
+class CBoardDescription{
+    constructor(id,name){
         this.id = id;
         this.name = name;
+    }
+}
+class CBoard{
+    notes = new Array();
+    boardDescription;
+    constructor(id,name)
+    {
+        this.boardDescription = new CBoardDescription(id,name);
     }
     Add(note){
         note.id =this.notes.length;
         this.notes.push(note);
     }
-    Remove(id){
-        if(id > 0 && id <= this.notes.length)
-            this.notes.splice(id-1,1);
+    Delete(id){
+        if(id >= 0 && id < this.notes.length)
+            this.notes.splice(id,1);
+    }
+    Update(note)
+    {
+        if(note.id)
+        {
+            let found = this.notes.find(element =>  element.id === note.id);
+            if(found)
+                found = note;
+        }
     }
 
 }
@@ -31,18 +48,41 @@ class CNotes{
 class CNoteBoard{
     noteBoard = new Array();
     current;
-
+    constructor(){
+        console.log("Initial CNoteBoard");
+    }
     Add(id,name){
-        let element = this.noteBoard.find(element => {return element.id === id && element.name === name;});
-        if(!element)
-            {
-                this.current = new CNotes(id,name);
-                this.noteBoard.push(this.current)
-            };
+        let foundNotBoard = this.noteBoard.find(element => {return element.id === id && element.name === name;});
+        if(!foundNotBoard)
+        {
+                foundNotBoard = new CBoard(id,name);
+                this.noteBoard.push(foundNotBoard);
+        }
+        this.current = foundNotBoard;
+    }
+    CreateNote(date,title,message){
+        this.current.Add(new CNote(date,title,message));
+    }
+    DeleteNote(id)
+    {
+        this.current.Delete(id);
+    }
+    EditNote(note)
+    {
+        this.current.Update(note);
     }
     Change(id){
-        let temp = this.noteBoard.find(element =>  element.id === id);
+        let temp = this.noteBoard.find(element =>  element.boardDescription.id === id);
         if(temp) this.current = temp;
     }
-
+    GetNotes()
+    {
+        return this.current.notes;
+    }
+    GetNoteBoard()
+    {
+        let board = new Array();
+        this.noteBoard.forEach(element => board.push(element.boardDescription));
+        return board;
+    }
 }

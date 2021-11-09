@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./ChoiceSelect.css">
+    
     <link rel="stylesheet" href="./NoteBoard.css">
     <title>Note Board</title>
 </head>
 <body>
     <div class="container">
-        <h3>Enter all the choces divides by comma <br>Pres WEnter when you done</h3>
-        <textarea class="textarea" name="" id="textarea" cols="30" rows="10"></textarea>
-        <div id="tags">
-           
-        </div>
+        <label for="boardName" id="boardNameLabel">Select Board</label>
+        <select name="boardName" id="boardName">
+
+        </select>
+        <label for="noteDate" id="noteDateLabel">Select Date</label>
+        <input type="datetime" name="noteDate" id="noteDate">
+        <label for="noteTitle" id="noteTitleLabel">Title</label>
+        <input type="text" name="noteTitle" id="noteTitle">
+        <label for="noteMessage" id="noteMessageLabel">Message</label>
+        <textarea name="noteMessage" id="noteMessage" cols="30" rows="10"></textarea>
+        <button class="btn" >Add Note</button>
+        <div class="notes"></div>
     </div>
-    <script src="./ChoiceSelect.js"></script>
+    <script src="./Note.js"></script>
     <script src="./NoteBoard.js"></script>
+    
 </body>
 </html>
