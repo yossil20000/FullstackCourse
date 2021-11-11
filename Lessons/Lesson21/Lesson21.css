@@ -1,0 +1,30 @@
+body{
+    display: flex;
+    flex-direction: column;
+    
+}
+.yNet{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: auto;
+    grid-gap: 5px;
+}
+.artical{
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+    padding-right: 1ch ;
+    word-wrap: normal;
+}
+.header{
+    display: flex;
+    width: 100%;
+    align-self: center;
+    justify-content: center;
+    background-color: beige;
+}
+.link{
+    align-self: center;
+    justify-self: flex-;
+}
