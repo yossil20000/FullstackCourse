@@ -5,28 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/font-awesome.css">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="./css/NoteBoard.css">
 
     <title>Note Board</title>
 </head>
 <body>
-    <div class="container">
-        <label for="boardName" id="boardNameLabel">Select Board</label>
-        <select name="boardName" id="boardName">
+ <div class="noteBoard">
+        <div class="container__input">
+            <label for="boardName" id="boardNameLabel">Select Board</label>
+            <select  id="boardName">
+     
+            </select>
+            <label for="noteDate" id="noteDateLabel">Select Date</label>
+            <input type="datetime-local" name="noteDate" id="noteDate" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
+            <label for="noteTitle" id="noteTitleLabel">Title</label>
+            <input type="text" name="noteTitle" id="noteTitle">
+            <label for="noteMessage" id="noteMessageLabel">Message</label>
+            <textarea name="noteMessage" id="noteMessage" cols="30" rows="10"></textarea>
+            <button class="btn" onclick="AddNote()" >Add Note</button>
+            <div class="notes">
+                <table class="notesTable">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Date</th>
+                            <th>Title</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody id="noteTableBody">
 
-        </select>
-        <label for="noteDate" id="noteDateLabel">Select Date</label>
-        <input type="datetime-local" name="noteDate" id="noteDate">
-        <label for="noteTitle" id="noteTitleLabel">Title</label>
-        <input type="text" name="noteTitle" id="noteTitle">
-        <label for="noteMessage" id="noteMessageLabel">Message</label>
-        <textarea name="noteMessage" id="noteMessage" cols="30" rows="10"></textarea>
-        <button class="btn" >Add Note</button>
-        <div class="notes">
-            kkkkk
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+ </div class="noteboard">
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="./js/Note.js"></script>
     <script src="./js/NoteBoard.js"></script>

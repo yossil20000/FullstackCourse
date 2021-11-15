@@ -11,94 +11,56 @@ body{
     align-items: center;
     justify-content: center; */
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
-    background-image: url("./Images/background.jpg");
-    background-size: contain;
+    background-image: url("../Images/background.jpg");
+    background-size: cover;
+    font-size: 1rem;
     
 }
-.container{
-    height: 100vh;
+.noteBoard{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns:  1fr;
+    margin-top: 10px;
+    justify-content: center;
+
+}
+
+.container__input{
+    height: 100%;
+    width: 100%;
     display: grid;
     grid-template-columns: 10px 1fr 10px;
     grid-template-rows: 2.5ch 3.5ch 2.5ch 3.5ch 2.5ch 3ch 2.5ch 5ch 3.5ch 1fr;
-    grid-gap:10px ;
-    margin-top: 10px;
-    font-size: 0.6rem;
-
+    grid-gap: 0;
+    
+    font-size: 0.7rem;
+   
+   
 }
 #boardName , #noteDate , #noteTitle, #noteMessage{
-    grid-column: 2/4;
+    grid-column: 2/3;
 }
 #boardNameLabel , #noteDateLabel , #noteTitleLabel, #noteMessageLabel{
-    grid-column: 2/4;
+    grid-column: 2/3;
     background-color: aliceblue;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .btn{
-    grid-column: 2/4;
+    grid-column: 2/3;
 }
 .notes{
-    grid-column: 1 / -1;
-    display: flex;
-    flex-direction: row;
+   grid-column: 2/3;
+   display: block;
+   width: 100%;
 }
-@media only screen and (min-width:320px) {
-    .container{
-        height: 100vh;
-        display: grid;
-        grid-template-columns: 10px 13ch 1fr 10px;
-        grid-template-rows: 2.5ch 2.5ch 2.5ch  2.5ch  6ch 2.5ch 1fr;
-        grid-gap:10px ;
-        margin-top: 10px;
-        font-size: 1rem;
-    }
-    #noteMessage , #noteMessageLabel{
-        grid-column: 2,4;
-    }
-    #boardName , #noteDate , #noteTitle{
-        grid-column: 3/4;
-    }
-    #boardNameLabel , #noteDateLabel , #noteTitleLabel{
-        grid-column: 2/3;
-        background-color: aliceblue;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .btn{
-        grid-column: 2/4;
-    }
-    .notes{
-        grid-column: 1 / -1;
-        display: flex;
-        flex-direction: row;
-    }    
-}
-@media only screen and (min-width:560){
-    .container{
-        height: 100%;
-        display: grid;
-        grid-template-areas: 
-        "note input note"
-        "note input note"
-        "note input note";
-        grid-template-columns: 1fr 0.5fr 1fr;
-        grid-template-rows:  1fr 0.5fr 1fr;
-        grid-gap:10px ;
-        margin-top: 10px;
-        font-size: 1rem;
-    }
-    #noteMessage , #noteMessageLabel ,  #boardName , #noteDate , #noteTitle , #boardNameLabel , #noteDateLabel , #noteTitleLabel , .btn{
-        grid-area: input;
-    }
- 
-  
-    .notes{
-        grid-area: note;
-       
-    }    
+.notesTable{
+    background-color: aliceblue;
+    width: 100%;
 }
 .note{
 
