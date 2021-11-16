@@ -11,8 +11,11 @@
     <title>Note Board</title>
 </head>
 <body>
- <div class="noteBoard">
+    <h1 style="text-align: ;">My NoteBoard </h1>
+    <div class="noteBoard">
+    
         <div class="container__input">
+            
             <label for="boardName" id="boardNameLabel">Select Board</label>
             <select  id="boardName">
      
@@ -24,21 +27,37 @@
             <label for="noteMessage" id="noteMessageLabel">Message</label>
             <textarea name="noteMessage" id="noteMessage" cols="30" rows="10"></textarea>
             <button class="btn" onclick="AddNote()" >Add Note</button>
-            <div class="notes">
-                <table class="notesTable">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Date</th>
-                            <th>Title</th>
-                            <th>Message</th>
-                        </tr>
-                    </thead>
-                    <tbody id="noteTableBody">
 
-                    </tbody>
-                </table>
+        </div>
+        <div class="notesNoteView">
+            <div class="note">
+                <div>Title</div>
+                <div>Date</div>
+                <div>Lorem ipsum dolor sit amet.</div>
             </div>
+            <div class="note">
+                <div>Title</div>
+                <div>Date</div>
+                <div>Lorem ipsum dolor sit amet.</div>
+            </div>
+            <div class="note">
+                <div>Title</div>
+                <div>Date</div>
+                <div>Lorem ipsum dolor sit amet.</div>
+            </div>
+                <table class="notesTableView">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Date</th>
+                        <th>Title</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody id="noteTableBody">
+
+                </tbody>
+            </table> -->
         </div>
  </div class="noteboard">
     <script src="/js/bootstrap.bundle.min.js"></script>

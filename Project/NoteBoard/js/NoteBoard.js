@@ -57,13 +57,37 @@ function AddNote()
 {
     noteBoard.CreateNote(document.getElementById("noteDate").value,document.getElementById("noteTitle").value,document.getElementById("noteMessage").value);
     console.log(noteBoard);
+    var noteTableBody = document.querySelector('.notesNoteView');
+    noteTableBody.innerHTML ="";
     noteBoard.GetNotes().forEach(item =>{
-        createTableNoteRow(item);
+        createTableNoteRow(item); 
+        createNote(item);
     })
+}
+function createNote(note)
+{
+/*     <div class="note">
+    <div>Title</div>
+    <div>Date</div>
+    <div>Lorem ipsum dolor sit amet.</div>
+</div> */
+    var noteElement = document.createElement('div');
+    noteElement.className = "note";
+    var element = document.createElement('div');
+    element.innerText = note.title;
+    noteElement.appendChild(element);
+    element.innerText = note.date;
+    noteElement.appendChild(element);
+    element.innerText = note.message;
+    noteElement.appendChild(element);
+    noteTableBody = document.querySelector('.notesNoteView').appendChild(noteElement);
+
+    
+
 }
 function createTableNoteRow( note)
 {
-    var tr = document.getElementById('noteTableBody');
+    var tr = document.querySelector('.noteTableBody');
     var newTr = document.createElement('tr');
     var newColumn = document.createElement('td');
     newColumn.innerText =  note.id;
