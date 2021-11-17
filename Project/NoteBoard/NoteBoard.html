@@ -11,13 +11,13 @@
     <title>Note Board</title>
 </head>
 <body>
-    <h1 style="text-align: ;">My NoteBoard </h1>
+    <h1 style="text-align:center;font-size: 1rem ; color: blueviolet;">My NoteBoard </h1>
     <div class="noteBoard">
     
         <div class="container__input">
             
-            <label for="boardName" id="boardNameLabel">Select Board</label>
-            <select  id="boardName">
+            <label for="boardName" id="boardNameLabel" >Select Board</label>
+            <select  id="boardName" onchange="selectBoard()">
      
             </select>
             <label for="noteDate" id="noteDateLabel">Select Date</label>
@@ -30,7 +30,7 @@
 
         </div>
         <div class="notesNoteView">
-            <div class="note">
+            <!-- <div class="note">
                 <div>Title</div>
                 <div>Date</div>
                 <div>Lorem ipsum dolor sit amet.</div>
@@ -44,21 +44,22 @@
                 <div>Title</div>
                 <div>Date</div>
                 <div>Lorem ipsum dolor sit amet.</div>
-            </div>
-                <table class="notesTableView">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Date</th>
-                        <th>Title</th>
-                        <th>Message</th>
-                    </tr>
-                </thead>
-                <tbody id="noteTableBody">
-
-                </tbody>
-            </table> -->
+            </div> -->
+                
         </div>
+      <!--   <table class="notesTableView">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody id="noteTableBody">
+
+            </tbody>
+        </table> -->
  </div class="noteboard">
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="./js/Note.js"></script>

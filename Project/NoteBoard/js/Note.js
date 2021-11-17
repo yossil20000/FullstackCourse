@@ -7,7 +7,8 @@ class CNote{
     title;
     constructor(date,title,message)
     {
-        this.date = date;
+        let d = new Date(date);
+        this.date = d;
         this.title = title ;
         this.message = message;
     }
@@ -72,7 +73,7 @@ class CNoteBoard{
         this.current.Update(note);
     }
     Change(id){
-        let temp = this.noteBoard.find(element =>  element.boardDescription.id === id);
+        let temp = this.noteBoard.find(element =>  element.boardDescription.id == id);
         if(temp) this.current = temp;
     }
     GetNotes()

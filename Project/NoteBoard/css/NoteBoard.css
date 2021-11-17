@@ -90,3 +90,15 @@ body{
     width: 15vw;
     font-size: 0.6rem
 }
+.noteTitle{
+    color: rgb(61, 61, 197);
+    text-decoration: underline;
+}
+.noteDate{
+    color: rgb(121, 121, 226);
+    
+}
+.noteMessage{
+    color: rgb(160, 160, 223);
+    
+}
