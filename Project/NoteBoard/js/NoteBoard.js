@@ -1,11 +1,9 @@
 var noteBoard = new CNoteBoard();
-
- noteBoard.Add("0","Todo List");
- noteBoard.Add("1","Events");
- 
-
+noteBoard.Add("0","Todo List");
+noteBoard.Add("1","Events");
  UpdateboardName();
  UpdatenoteDate()
+
  function selectBoard()
  {
      var selectedBoard  = document.querySelector('#boardName');
@@ -15,6 +13,7 @@ var noteBoard = new CNoteBoard();
      noteBoard.Change(index);
      updateBoard();
  }
+
  function UpdateboardName()
  {
      noteBoard.GetNoteBoard().forEach(item => {
@@ -25,6 +24,7 @@ var noteBoard = new CNoteBoard();
          boardName.appendChild(boardNameItem);
      })
  }
+
  function UpdatenoteDate()
  {
      let date = new Date(); 
@@ -73,11 +73,19 @@ function updateBoard(){
 }
 function AddNote()
 {
-    noteBoard.CreateNote(document.getElementById("noteDate").value,document.getElementById("noteTitle").value,document.getElementById("noteMessage").value);
+    let noteDate = document.getElementById("noteDate").value;
+    let noteTitle = document.getElementById("noteTitle").value;
+    let noteMessage = document.getElementById("noteMessage").value;
+    if(noteDate == "" || noteTitle =="" ||  noteMessage == "")
+        {
+            return;
+        }
+    noteBoard.CreateNote(noteDate,noteTitle,noteMessage);
     console.log(noteBoard);
     var noteTableBody = document.querySelector('.notesNoteView');
     noteTableBody.innerHTML ="";
-    noteBoard.GetNotes().forEach(item =>{
+    
+    noteBoard.GetNotes().sort((a,b) => a.date - b.date).forEach(item =>{
         /* createTableNoteRow(item);  */
         createNote(item);
     })
@@ -89,19 +97,35 @@ function createNote(note)
     <div>Date</div>
     <div>Lorem ipsum dolor sit amet.</div>
 </div> */
+
     var noteElement = document.createElement('div');
     noteElement.className = "note";
     var element = document.createElement('div');
+    element.className ='close';
+    element.addEventListener('click', element => {
+
+        console.log(element.);
+    });
+    element.setAttribute('data-id', note.id);
+    noteElement.appendChild(element);
+    element = document.createElement('div');
     element.innerText = note.title;
     element.className = 'noteTitle';
     noteElement.appendChild(element);
     element = document.createElement('div');
     element.className = 'noteDate';
-    element.innerText = `${note.date.getFullYear()} ${note.date.getHours()}:${note.date.getMinutes()}`;
+    element.innerText = `${note.date.toDateString()} ${note.date.getHours()}:${note.date.getMinutes()}`;
     let elpasse = Date.now()- note.date;
-    if(elpasse > 0)
+    if(note.date.toDateString() == new Date().toDateString())
+    {
+        noteElement.style.backgroundColor = "green";
+    }
+    else if(elpasse > 0)
     {
         noteElement.style.backgroundColor = "red";
+    }
+    else{
+        noteElement.style.backgroundColor = "blue";
     }
     noteElement.appendChild(element);
     element = document.createElement('p');
@@ -113,6 +137,7 @@ function createNote(note)
     
 
 }
+
 function createTableNoteRow( note)
 {
     var tr = document.querySelector('.notesTableView');
@@ -131,4 +156,22 @@ function createTableNoteRow( note)
     newTr.appendChild(newColumn);
     tr.appendChild(newTr);
 }
+function SortByDate(arrayTosort)
+{
+    return arrayTosort.sort(ComapareNoteDate);
+}
+function ComapareNoteDate(noteA ,noteB)
+{
+    if(noteA.date > noteB.date)
+        return 1;
+    else if(noteA.date > noteB.date)
+    {
+        return -1;
+    }
+    else
+    return 0;
+}
 
+function OnDelete(e){
+    console.log(this);
+}
