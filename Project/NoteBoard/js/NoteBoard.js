@@ -102,7 +102,7 @@ function createNote(note)
     var noteElement = document.createElement('div');
     noteElement.className = "note";
     var element = document.createElement('div');
-    element.className ='close';
+    element.className ='gNoteClose';
     element.addEventListener('click', function(e) {
 
         console.log(this.getAttribute('data-id'));
@@ -113,10 +113,10 @@ function createNote(note)
     noteElement.appendChild(element);
     element = document.createElement('div');
     element.innerText = note.title;
-    element.className = 'noteTitle';
+    element.className = 'gNoteTitle';
     noteElement.appendChild(element);
     element = document.createElement('div');
-    element.className = 'noteDate';
+    element.className = 'gNoteDate';
     element.innerText = `${note.date.toDateString()} ${note.date.getHours()}:${note.date.getMinutes()}`;
     let elpasse = Date.now()- note.date;
     if(note.date.toDateString() == new Date().toDateString())
@@ -133,7 +133,7 @@ function createNote(note)
     }
     noteElement.appendChild(element);
     element = document.createElement('p');
-    element.className = 'noteMessage';
+    element.className = 'gNoteMessage';
     element.innerText = note.message;
     noteElement.appendChild(element);
     noteTableBody = document.querySelector('.notesNoteView').appendChild(noteElement);

@@ -81,10 +81,19 @@ body{
     ". date date ."
     ". message message ."
     ;
-    grid-template-columns: 3ch 3ch 1fr 3ch;
+    grid-template-columns: 1ch 3ch 1fr 1ch;
+    grid-template-rows: 3ch 3ch auto 1fr;
+    border: 2px solid red;
+    grid-gap: 0.5ch;
+    background-image: url("../Images/note.png");
+    background-size: cover;
+    margin: 3px;
+    height: 25vw;
+    width: 25vw;
+    font-size: 0.6rem
 }
 
-.note{
+/* .note{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -100,19 +109,47 @@ body{
     height: 15vw;
     width: 15vw;
     font-size: 0.6rem
-}
+} */
 
 .gNoteClose{
     grid-area: close;
+    width: 2ch;
+    height: 2ch;
+    opacity: 0.3;
 }
+.clgNoteClose:hover {
+    opacity: 1;
+    border: 2px solid black;
+  }
+  .gNoteClose:before, .gNoteClose:after {
+    position: absolute;
+    left: 14px;
+    content: ' ';
+    height: 2ch;
+    width: 4px;
+    background-color: #333;
+  }
+  .gNoteClose:before {
+    transform: rotate(45deg);
+  }
+  .gNoteClose:after {
+    transform: rotate(-45deg);
+  }
 .gNoteTitle{
     grid-area: title;
+    color: black;
+    text-align: center;
 }
 .gNoteDate{
     grid-area: date;
+    color: gray;
+    text-align: center;
 }
-gNoteMessage{
+.gNoteMessage{
     grid-area: message;
+    font-size: 1rem;
+    color: rgb(177, 15, 15);
+    
 }
 .note:hover{
     height: 50vw;
@@ -123,6 +160,7 @@ gNoteMessage{
     -moz-transition: all 0.5s;
     -ms-transition: all 0.5s;
     -o-transition: all 0.5s;
+    grid-template-rows: 6ch 3ch auto 1fr;
 }
 .notePassedDate{
     opacity: 0.5;
