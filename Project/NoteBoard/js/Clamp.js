@@ -14,3 +14,9 @@ function clampBuilder( minWidthPx, maxWidthPx, minFontSize, maxFontSize ) {
   }
   
   // clampBuilder( 360, 840, 1, 3.5 ) -> "clamp( 1rem, -0.875rem + 8.333vw, 3.5rem )"
+  function arrayRemove(arr, value) { 
+    
+    return arr.filter(function(ele){ 
+        return ele != value; 
+    });
+}

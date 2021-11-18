@@ -31,8 +31,10 @@ class CBoard{
         this.notes.push(note);
     }
     Delete(id){
-        if(id >= 0 && id < this.notes.length)
-            this.notes.splice(id,1);
+        if(id)
+        {
+            this.notes= this.arrayRemoveById(this.notes,id) ;  
+        }
     }
     Update(note)
     {
@@ -43,7 +45,13 @@ class CBoard{
                 found = note;
         }
     }
-
+    arrayRemoveById(arr, value) { 
+    
+        return arr.filter(function(ele){ 
+            console.log(`${ele.id} val:${value} condition:${ele.id != value}`);
+            return ele.id != value; 
+        });
+    }
 }
 
 class CNoteBoard{

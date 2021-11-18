@@ -74,6 +74,17 @@ body{
     width: 100%;
 }
 .note{
+    display: grid;
+    grid-template-areas: 
+    ". close . ."
+    ". title title ."
+    ". date date ."
+    ". message message ."
+    ;
+    grid-template-columns: 3ch 3ch 1fr 3ch;
+}
+
+.note{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -84,11 +95,37 @@ body{
     
     background-color: aquamarine;
     background-image: url("../Images/note.png");
-    background-size: contain;
+    background-size: cover;
     margin: 3px;
     height: 15vw;
     width: 15vw;
     font-size: 0.6rem
+}
+
+.gNoteClose{
+    grid-area: close;
+}
+.gNoteTitle{
+    grid-area: title;
+}
+.gNoteDate{
+    grid-area: date;
+}
+gNoteMessage{
+    grid-area: message;
+}
+.note:hover{
+    height: 50vw;
+    width: 50vw;
+    transition: all 0.5s;
+    opacity: 1;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+}
+.notePassedDate{
+    opacity: 0.5;
 }
 .noteTitle{
     color: rgb(61, 61, 197);

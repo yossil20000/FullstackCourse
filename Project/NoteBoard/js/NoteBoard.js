@@ -66,7 +66,7 @@ console.log(noteBoard); */
 function updateBoard(){
     var noteTableBody = document.querySelector('.notesNoteView');
     noteTableBody.innerHTML ="";
-    noteBoard.GetNotes().forEach(item =>{
+    noteBoard.GetNotes().sort((a,b) => a.date - b.date).forEach(item =>{
         /* createTableNoteRow(item);  */
         createNote(item);
     })
@@ -82,13 +82,14 @@ function AddNote()
         }
     noteBoard.CreateNote(noteDate,noteTitle,noteMessage);
     console.log(noteBoard);
-    var noteTableBody = document.querySelector('.notesNoteView');
+    updateBoard();
+/*     var noteTableBody = document.querySelector('.notesNoteView');
     noteTableBody.innerHTML ="";
     
     noteBoard.GetNotes().sort((a,b) => a.date - b.date).forEach(item =>{
-        /* createTableNoteRow(item);  */
+        // createTableNoteRow(item);  
         createNote(item);
-    })
+    }) */
 }
 function createNote(note)
 {
@@ -102,9 +103,11 @@ function createNote(note)
     noteElement.className = "note";
     var element = document.createElement('div');
     element.className ='close';
-    element.addEventListener('click', element => {
+    element.addEventListener('click', function(e) {
 
-        console.log(element.);
+        console.log(this.getAttribute('data-id'));
+        noteBoard.DeleteNote(this.getAttribute('data-id'));
+        updateBoard();
     });
     element.setAttribute('data-id', note.id);
     noteElement.appendChild(element);
@@ -123,6 +126,7 @@ function createNote(note)
     else if(elpasse > 0)
     {
         noteElement.style.backgroundColor = "red";
+        noteElement.classList.add('notePassedDate');
     }
     else{
         noteElement.style.backgroundColor = "blue";
