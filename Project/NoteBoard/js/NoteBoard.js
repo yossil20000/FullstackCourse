@@ -91,7 +91,7 @@ function AddNote()
         createNote(item);
     }) */
 }
-function createNote(note)
+function createNote(note )
 {
 /*     <div class="note">
     <div>Title</div>
@@ -102,6 +102,7 @@ function createNote(note)
     var noteElement = document.createElement('div');
     noteElement.className = "note";
     var element = document.createElement('div');
+    element.innerHTML = '<i class="fas fa-times-circle fa-2x"></i>';
     element.className ='gNoteClose';
     element.addEventListener('click', function(e) {
 
@@ -119,6 +120,7 @@ function createNote(note)
     element.className = 'gNoteDate';
     element.innerText = `${note.date.toDateString()} ${note.date.getHours()}:${note.date.getMinutes()}`;
     let elpasse = Date.now()- note.date;
+    let noteFilterToday = document.getElementById("noteFilterToday").checked;
     if(note.date.toDateString() == new Date().toDateString())
     {
         noteElement.style.backgroundColor = "green";
@@ -127,9 +129,11 @@ function createNote(note)
     {
         noteElement.style.backgroundColor = "red";
         noteElement.classList.add('notePassedDate');
+        setHide(noteElement,noteFilterToday);
     }
     else{
         noteElement.style.backgroundColor = "blue";
+        setHide(noteElement,noteFilterToday);
     }
     noteElement.appendChild(element);
     element = document.createElement('p');
@@ -141,7 +145,13 @@ function createNote(note)
     
 
 }
-
+function setHide(element,hide)
+{
+    if(hide)
+            element.classList.add('hide');
+        else
+            element.classList.remove('hide');
+}
 function createTableNoteRow( note)
 {
     var tr = document.querySelector('.notesTableView');
@@ -178,4 +188,8 @@ function ComapareNoteDate(noteA ,noteB)
 
 function OnDelete(e){
     console.log(this);
+}
+function noteFilterTodayChanged(){
+    console.log(document.getElementById("noteFilterToday").checked)
+    updateBoard();
 }

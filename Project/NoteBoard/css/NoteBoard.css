@@ -4,6 +4,11 @@
     padding: 0;
     margin: 0;
 }
+:root{
+    --note-hover-factor:2;
+    --note-height: 15vh;
+    --note-width: 15vh;
+}
 body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
    /*  display: flex;
@@ -35,12 +40,20 @@ body{
     width: 100%;
     display: grid;
     grid-template-columns: 10px 1fr 10px;
-    grid-template-rows: 2.5ch 3.5ch 2.5ch 3.5ch 2.5ch 3ch 2.5ch 5ch 3.5ch 1fr;
+    grid-template-rows: 2.5ch 3.5ch 2.5ch 3.5ch 2.5ch 3ch 2.5ch 5ch 3.5ch 3.5ch 1fr;
     grid-gap: 0;
     
     font-size: 0.7rem;
    
    
+}
+.noteFilterToday{
+    grid-column: 2/3;
+    display: inline-flex;
+    background-color: aliceblue;
+    justify-content: center;
+    align-items: center;
+    font-size: inherit;
 }
 #boardName , #noteDate , #noteTitle, #noteMessage{
     grid-column: 2/3;
@@ -75,22 +88,22 @@ body{
 }
 .note{
     display: grid;
-    grid-template-areas: 
-    ". close . ."
-    ". title title ."
-    ". date date ."
-    ". message message ."
-    ;
+    grid-template-areas:     ". close . ."     ". date date ." ". title title ."       ". message message ."    ;
     grid-template-columns: 1ch 3ch 1fr 1ch;
-    grid-template-rows: 3ch 3ch auto 1fr;
+    grid-template-rows: 10% 3ch auto 1fr;
     border: 2px solid red;
     grid-gap: 0.5ch;
     background-image: url("../Images/note.png");
     background-size: cover;
     margin: 3px;
-    height: 25vw;
-    width: 25vw;
-    font-size: 0.6rem
+    height: var(--note-height);
+    width: var(--note-width);
+    font-size: 0.6rem;
+    border-radius: 3% ;
+    -webkit-border-radius: 3% ;
+    -moz-border-radius: 3% ;
+    -ms-border-radius: 3% ;
+    -o-border-radius: 3% ;
 }
 
 /* .note{
@@ -116,12 +129,15 @@ body{
     width: 2ch;
     height: 2ch;
     opacity: 0.3;
+    justify-self: left;
+    align-self: flex-start;
+    padding-top: 2px;
 }
 .clgNoteClose:hover {
     opacity: 1;
     border: 2px solid black;
   }
-  .gNoteClose:before, .gNoteClose:after {
+/*   .gNoteClose:before, .gNoteClose:after {
     position: absolute;
     left: 14px;
     content: ' ';
@@ -134,26 +150,32 @@ body{
   }
   .gNoteClose:after {
     transform: rotate(-45deg);
-  }
+  } */
 .gNoteTitle{
     grid-area: title;
     color: black;
     text-align: center;
+    font-size: 1rem;
+    text-decoration: underline;
 }
 .gNoteDate{
+    
     grid-area: date;
     color: gray;
     text-align: center;
+    background-color: yellowgreen;
+    
+    
 }
 .gNoteMessage{
     grid-area: message;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: rgb(177, 15, 15);
     
 }
 .note:hover{
-    height: 50vw;
-    width: 50vw;
+    height: calc(var(--note-height ) * var(--note-hover-factor));
+    width: calc(var(--note-width ) * var(--note-hover-factor));
     transition: all 0.5s;
     opacity: 1;
     -webkit-transition: all 0.5s;
@@ -204,4 +226,6 @@ body{
   .close:after {
     transform: rotate(-45deg);
   }
-  
+  .hide{
+      display: none;
+  }
