@@ -1,3 +1,4 @@
+
 var noteBoard = new CNoteBoard();
 noteBoard.Add("0","Todo List");
 noteBoard.Add("1","Events");
@@ -33,36 +34,7 @@ noteBoard.Add("1","Events");
      /* document.getElementById('noteDate').value = dateString; */
      setDateTime(document.getElementById('noteDate'),date);
  }
- function setDateTime(element, date) {
-  
-    const dateForDateTimeInputValue = date => new Date(date.getTime() + new Date().getTimezoneOffset() * -60 * 1000).toISOString().slice(0, 19);
-    element.value = timestampToDatetimeInputString(Date.now());;
-}
 
-function timestampToDatetimeInputString(timestamp) {
-    const date = new Date((timestamp + _getTimeZoneOffsetInMs()));
-    // slice(0, 19) includes seconds
-    return date.toISOString().slice(0, 19);
-  }
-  
-  function _getTimeZoneOffsetInMs() {
-    return new Date().getTimezoneOffset() * -60 * 1000;
-  }
-/*noteBoard.Add("A","B");
-console.log(noteBoard);
-noteBoard.CreateNote("21/08/1965","Doctor1","Ceack1");
-noteBoard.CreateNote("21/08/1966","Doctor2","Ceack2");
-noteBoard.CreateNote("21/08/1967","Doctor3","Ceack3");
-console.log(noteBoard);
-noteBoard.Change("059828392");
-console.log(noteBoard);
-noteBoard.CreateNote("21/08/1965","Doctor_059","Ceack1");
-noteBoard.Change("A");
-let notes = noteBoard.GetNotes();
-console.log(notes);
-console.log(noteBoard.GetNoteBoard());
-noteBoard.DeleteNote(notes[0].id);
-console.log(noteBoard); */
 function updateBoard(){
     var noteTableBody = document.querySelector('.notesNoteView');
     noteTableBody.innerHTML ="";
@@ -83,21 +55,9 @@ function AddNote()
     noteBoard.CreateNote(noteDate,noteTitle,noteMessage);
     console.log(noteBoard);
     updateBoard();
-/*     var noteTableBody = document.querySelector('.notesNoteView');
-    noteTableBody.innerHTML ="";
-    
-    noteBoard.GetNotes().sort((a,b) => a.date - b.date).forEach(item =>{
-        // createTableNoteRow(item);  
-        createNote(item);
-    }) */
 }
 function createNote(note )
 {
-/*     <div class="note">
-    <div>Title</div>
-    <div>Date</div>
-    <div>Lorem ipsum dolor sit amet.</div>
-</div> */
 
     var noteElement = document.createElement('div');
     noteElement.className = "note";
@@ -145,13 +105,7 @@ function createNote(note )
     
 
 }
-function setHide(element,hide)
-{
-    if(hide)
-            element.classList.add('hide');
-        else
-            element.classList.remove('hide');
-}
+
 function createTableNoteRow( note)
 {
     var tr = document.querySelector('.notesTableView');
@@ -190,6 +144,6 @@ function OnDelete(e){
     console.log(this);
 }
 function noteFilterTodayChanged(){
-    console.log(document.getElementById("noteFilterToday").checked)
-    updateBoard();
+    console.log(document.getElementById("noteFilterToday").checked);
+    updateBoard()
 }

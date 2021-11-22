@@ -8,6 +8,9 @@
     --note-hover-factor:2;
     --note-height: 15vh;
     --note-width: 15vh;
+    --mobile-width: 320px;
+    --tablet-width: 768px;
+    --desktop-width: 1224px;
 }
 body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -228,4 +231,49 @@ body{
   }
   .hide{
       display: none;
+  }
+
+  @media screen and (min-width:560px){
+    .noteBoard{
+    
+        width: 100%;
+        display: grid;
+        grid-template-areas: 
+        "left inputData right"
+        "left center right"
+        ;
+        grid-template-columns:  1fr 2fr 1fr;
+        grid-template-rows: auto auto;
+        margin-top: 10px;
+        
+    
+    }
+    .notesNoteView{
+    
+        width: 95%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        grid-area: center;
+        overflow-y: scroll;
+        margin: auto;
+     }
+     .container__input{
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 10px 1fr 10px;
+        grid-template-rows: 2.5ch 3.5ch 2.5ch 3.5ch 2.5ch 3ch 2.5ch 5ch 3.5ch 3.5ch 1fr;
+        grid-gap: 0;
+        
+        font-size: 0.7rem;
+        grid-area: inputData;
+       
+    }
+    .leftnotesNoteView{
+        grid-area: left;
+    }
+    .rightnotesNoteView{
+        grid-area: right;
+    }
   }

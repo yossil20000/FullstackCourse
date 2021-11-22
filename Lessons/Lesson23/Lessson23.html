@@ -10,7 +10,27 @@
   <link rel="stylesheet" class="js-color-style" href="css/colors/color-1.css">
 </head>
 <body>
+<div class="container d-flex flex-column">
+  <h1>Bitcoin Searcher</h1>
+  <di class="search">
+    <label for="searchCoin">Search:</label>
+    <input type="text" name="searchCoin" id="searchCoin" placeholder="Search" onchange="filterData()">
+    <button onclick="filterData()">Search</button>
+  </di>
+  <table id="tableCoins">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Rate</th>
+      </tr
+    </thead>
+    <tbody class="tableCoin" id="tableCoin">
 
+    </tbody>
+  </table>
+</div>
 
 <script src="js/bootstrap.bundle.min.js"></script>  
 <script src="./js/data.js"></script>
