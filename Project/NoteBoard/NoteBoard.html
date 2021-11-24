@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/NoteBoard.css">
     <script defer src="/js/bootstrap.bundle.min.js"></script>
     <script defer src="./js/GeneralFunction.js"></script>
+    <script defer src="./js/textarea.js"></script>
     <script defer src="./js/Note.js"></script>
     <script defer src="./js/NoteBoard.js"></script>
     <title>Note Board</title>
@@ -29,7 +30,7 @@
             <label for="noteTitle" id="noteTitleLabel">Title</label>
             <input type="text" name="noteTitle" id="noteTitle">
             <label for="noteMessage" id="noteMessageLabel">Message</label>
-            <textarea name="noteMessage" id="noteMessage" cols="30" rows="10"></textarea>
+            <textarea autoresize name="noteMessage" id="noteMessage" ></textarea>
             <button class="btn" onclick="AddNote()" >Add Note</button>
             <div class="noteFilterToday">
                 <label for="noteFilterToday">Show today Task: </label>
@@ -37,26 +38,13 @@
             </div>
         </div>
         
-        <div class="notesNoteView">
-           
-<!--              <div class="note">
-                <a href="#" class="close">
-                <div>Title</div>
-                <div>Date</div>
-                <div>Lorem ipsum dolor sit amet.</div>
-            </div>
-            <div class="note">
-                <div>Title</div>
-                <div>Date</div>
-                <div>Lorem ipsum dolor sit amet.</div>
-            </div>
-            <div class="note">
-                <div>Title</div>
-                <div>Date</div>
-                <div>Lorem ipsum dolor sit amet.</div>
-            </div> -->
-                
+<!--         <div class="centernotesNoteView">
         </div>
+        <div class="leftnotesNoteView">
+        </div>
+        <div class="rightnotesNoteView">
+        </div> -->
+        
       <!--   <table class="notesTableView">
             <thead>
                 <tr>

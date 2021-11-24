@@ -1,8 +1,8 @@
-let mobileWidthQuery = getComputedStyle(document.documentElement).getPropertyValue('--mobile-width');
-var tabletWidthQuery = getComputedStyle(document.documentElement).getPropertyValue('--tablet-width');
-let deviceMobile = window.matchMedia(`(min-width:${mobileWidthQuery})`);
+let desktopWidthQuery = getComputedStyle(document.documentElement).getPropertyValue('--desktop-width');
+let tabletWidthQuery = getComputedStyle(document.documentElement).getPropertyValue('--tablet-width');
+let deviceDesktop = window.matchMedia(`(min-width:${desktopWidthQuery})`);
 let deviceTablet = window.matchMedia(`(min-width:${tabletWidthQuery})`);
-deviceMobile.addEventListener('change', handleDeviceChange);
+deviceDesktop.addEventListener('change', handleDeviceChange);
 deviceTablet.addEventListener('change',handleDeviceChange);
 
 class Display{
@@ -27,6 +27,7 @@ class Display{
 }
 let typeScreen = new Display(Display.Mobile);
 handleDeviceChange(deviceTablet);
+handleDeviceChange(deviceDesktop);
 
 
 /* const eDisplay = {
@@ -42,19 +43,28 @@ handleDeviceChange(deviceTablet);
 
 
 function handleDeviceChange(e){
-    console.log(e.media.includes(mobileWidthQuery));
-    if(e.matches && e.media.includes(mobileWidthQuery))
+    console.log(e);
+    if(e.matches && e.media.includes(tabletWidthQuery))
     {
         typeScreen.name = Display.Tablet;
-            console.log(`match mobile ${mobileWidthQuery} typeScreen:${typeScreen.IsTablet()}`);
+            console.log(`match mobile ${tabletWidthQuery} typeScreen:${typeScreen.IsTablet()} ${typeScreen.name}`);
     }
-    else if(e.matches && e.media.includes(tabletWidthQuery)){
+    else if(!e.matches && e.media.includes(tabletWidthQuery))
+    {
+        typeScreen.name = Display.Mobile;
+        console.log(`match mobile ${tabletWidthQuery} typeScreen:${typeScreen.IsMobile()} ${typeScreen.name}`);
+    }
+    else if(e.matches && e.media.includes(desktopWidthQuery)){
         typeScreen.name= Display.Desktop;
-        console.log(`match ${tabletWidthQuery} typeScreen:${typeScreen.IsDesktop()}`);
+        console.log(`match ${desktopWidthQuery} typeScreen:${typeScreen.IsDesktop()} ${typeScreen.name}`);
+    }
+    else if(!e.matches && e.media.includes(desktopWidthQuery)){
+        typeScreen.name= Display.Tablet;
+        console.log(`match ${desktopWidthQuery} typeScreen:${typeScreen.IsDesktop()} ${typeScreen.name}`);
     }
     else {
-        typeScreen.name = Display.Mobile;
-        console.log(`match ${mobileWidthQuery} typeScreen:${typeScreen.IsMobile()}`);
+        typeScreen.name = Display.Desktop;
+        console.log(` Illigal typeScreen:${typeScreen.IsMobile()} ${typeScreen.name}`);
     }
 }
 
@@ -79,4 +89,47 @@ function timestampToDatetimeInputString(timestamp) {
             element.classList.add('hide');
         else
             element.classList.remove('hide');
+}
+function getCreateElementById(htmlElement,className,id)
+{
+    let elements = document.querySelectorAll(`#${id}`);
+    if(elements.length == 0)
+    {
+        
+        let element = document.createElement(htmlElement);
+        element.id = id;
+        element.className = className;
+        return element;
+    }
+    else if(elements.length == 1)
+        return elements[0];
+    else
+        return undefined;
+}
+function getCreateElementByClass(htmlElement,className,id)
+{
+    let elements = document.querySelectorAll(`.${className}`);
+    if(elements.length == 0)
+    {
+        
+        let element = document.createElement(htmlElement);
+        element.id = id;
+        element.className = className;
+        return element;
+    }
+    else if(elements.length == 1)
+        return elements[0];
+    else
+        return undefined;
+}
+
+function setInLocalStorate(key, value)
+{
+    localStorage.setItem(key, JSON.stringify(value));
+}
+function getLocalStorage(key)
+{
+    let o = JSON.parse( localStorage.getItem(key));
+    console.log(o);
+    return o;
 }

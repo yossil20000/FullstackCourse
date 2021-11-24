@@ -26,8 +26,12 @@ class CBoard{
     {
         this.boardDescription = new CBoardDescription(id,name);
     }
-    Add(note){
-        note.id =this.notes.length;
+    Add(note,id){
+        if(!id)
+            note.id =this.notes.length;
+        else{
+            note.id = id;   
+        }
         this.notes.push(note);
     }
     Delete(id){
@@ -61,13 +65,13 @@ class CNoteBoard{
         console.log("Initial CNoteBoard");
     }
     Add(id,name){
-        let foundNotBoard = this.noteBoard.find(element => {return element.id === id && element.name === name;});
-        if(!foundNotBoard)
+        let foundNoteBoard = this.noteBoard.find(element => {return element.id === id && element.name === name;});
+        if(!foundNoteBoard)
         {
-                foundNotBoard = new CBoard(id,name);
-                this.noteBoard.push(foundNotBoard);
+                foundNoteBoard = new CBoard(id,name);
+                this.noteBoard.push(foundNoteBoard);
         }
-        this.current = foundNotBoard;
+        this.current = foundNoteBoard;
     }
     CreateNote(date,title,message){
         this.current.Add(new CNote(date,title,message));
@@ -94,4 +98,33 @@ class CNoteBoard{
         this.noteBoard.forEach(element => board.push(element.boardDescription));
         return board;
     }
-}
+    UpdateFromJson(jsonData)
+    {
+        jsonData.forEach( item => {
+            this.Add(item.boardDescription.id,item.boardDescription.name);
+            item.notes.forEach(note => {
+                this.CreateNote(note.date,note.title,note.message,note.id)
+            })
+        })
+        this.Change(0);
+    }
+
+} 
+ /*   0:
+ boardDescription: {id: '0', name: 'Todo List'}
+notes: Array(1)
+0:
+date: "2021-11-24T18:01:29.000Z"
+id: 0
+message: "a"
+title: "a"
+[[Prototype]]: Object
+length: 1
+[[Prototype]]: Array(0)
+[[Prototype]]: Object
+1:
+boardDescription: {id: '1', name: 'Events'}
+notes: []
+[[Prototype]]: Object
+length: 2
+[[Prototy)*/

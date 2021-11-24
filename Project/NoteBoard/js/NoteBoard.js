@@ -1,10 +1,29 @@
+var noteBoard;
+let noteBoardLocalStorage = 'NoteBoard';
+ window.onload = () =>{
+    
+} 
+InitFromLocalStorage();
 
-var noteBoard = new CNoteBoard();
-noteBoard.Add("0","Todo List");
-noteBoard.Add("1","Events");
  UpdateboardName();
  UpdatenoteDate()
+ updateBoard();
+ function InitFromLocalStorage()
+ {
+    noteBoard = new CNoteBoard();
+    notesLocal= getLocalStorage(noteBoardLocalStorage);
+    if(notesLocal)
+        {
+            console.log(notesLocal);
+            noteBoard.UpdateFromJson(notesLocal);
+        }
+        else{
+            
+            noteBoard.Add("0","Todo List");
+            noteBoard.Add("1","Events");
+        }
 
+ }
  function selectBoard()
  {
      var selectedBoard  = document.querySelector('#boardName');
@@ -34,14 +53,26 @@ noteBoard.Add("1","Events");
      /* document.getElementById('noteDate').value = dateString; */
      setDateTime(document.getElementById('noteDate'),date);
  }
-
+ function ClearNoteParents()
+ {
+    var noteTableBody = document.querySelector('.centernotesNoteView');
+    if(noteTableBody)
+        noteTableBody.innerHTML ="";
+    noteTableBody = document.querySelector('.leftnotesNoteView');
+    if(noteTableBody)
+        noteTableBody.innerHTML ="";
+    noteTableBody = document.querySelector('.rightnotesNoteView');
+    if(noteTableBody)
+        noteTableBody.innerHTML ="";
+ }
 function updateBoard(){
-    var noteTableBody = document.querySelector('.notesNoteView');
-    noteTableBody.innerHTML ="";
+    
+    ClearNoteParents();
     noteBoard.GetNotes().sort((a,b) => a.date - b.date).forEach(item =>{
         /* createTableNoteRow(item);  */
         createNote(item);
     })
+    setInLocalStorate(noteBoardLocalStorage, noteBoard.noteBoard);
 }
 function AddNote()
 {
@@ -58,9 +89,9 @@ function AddNote()
 }
 function createNote(note )
 {
-
     var noteElement = document.createElement('div');
-    noteElement.className = "note";
+    
+    
     var element = document.createElement('div');
     element.innerHTML = '<i class="fas fa-times-circle fa-2x"></i>';
     element.className ='gNoteClose';
@@ -81,31 +112,83 @@ function createNote(note )
     element.innerText = `${note.date.toDateString()} ${note.date.getHours()}:${note.date.getMinutes()}`;
     let elpasse = Date.now()- note.date;
     let noteFilterToday = document.getElementById("noteFilterToday").checked;
+   
+    noteElement.appendChild(element);
+    element = document.createElement('p');
+    element.className = 'gNoteMessage';
+    element.innerText = note.message;
+    noteElement.appendChild(element);
+    noteElement.className = "note";
+    
+    
     if(note.date.toDateString() == new Date().toDateString())
     {
         noteElement.style.backgroundColor = "green";
+        elpasse =0;
     }
     else if(elpasse > 0)
     {
         noteElement.style.backgroundColor = "red";
         noteElement.classList.add('notePassedDate');
         setHide(noteElement,noteFilterToday);
+        if(typeScreen.IsMobile())
+        {
+            
+            setHide(noteElement,noteFilterToday);
+        }
     }
     else{
         noteElement.style.backgroundColor = "blue";
-        setHide(noteElement,noteFilterToday);
+        
+        if(typeScreen.IsMobile())
+        { 
+            setHide(noteElement,noteFilterToday);
+        }
     }
-    noteElement.appendChild(element);
-    element = document.createElement('p');
-    element.className = 'gNoteMessage';
-    element.innerText = note.message;
-    noteElement.appendChild(element);
-    noteTableBody = document.querySelector('.notesNoteView').appendChild(noteElement);
+    getNoteParentElement(elpasse).appendChild(noteElement);
 
     
 
 }
 
+function getNoteParentElement(elpasse)
+{
+    let parentElement = document.querySelector('.noteBoard');
+    let elementNoteParent;
+    if(elpasse == 0 || typeScreen.IsMobile())
+    {
+        elementNoteParent = getCreateElementByClass('div','centernotesNoteView',"");
+        
+    }
+    else if(elpasse > 0){
+        
+        if(typeScreen.IsMobile()){
+            elementNoteParent = getCreateElementByClass('div','centernotesNoteView',"");
+            
+        }
+        else
+        {
+            elementNoteParent = getCreateElementByClass('div','leftnotesNoteView',"");
+            
+        }
+        
+    }
+    else{
+        if(typeScreen.IsMobile())
+        {
+            elementNoteParent = getCreateElementByClass('div','centernotesNoteView',"");
+            
+        }
+        else
+        {
+            elementNoteParent = getCreateElementByClass('div','rightnotesNoteView',"");
+            
+        }
+        
+    }
+    parentElement.appendChild(elementNoteParent);
+    return  elementNoteParent;
+}
 function createTableNoteRow( note)
 {
     var tr = document.querySelector('.notesTableView');
