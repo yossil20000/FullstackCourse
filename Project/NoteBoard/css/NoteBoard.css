@@ -42,23 +42,56 @@ body{
     width: 100%;
     display: grid;
     grid-template-columns: 10px 1fr 10px;
-    grid-template-rows: 2.5ch 3.5ch 2.5ch 3.5ch 2.5ch 3ch 2.5ch 5ch 3.5ch 3.5ch 1fr;
+    grid-template-rows: 2.5ch 3.5ch 2.5ch 3.5ch 2.5ch 3ch 2.5ch 5ch 3.5ch 10ch 1fr;
     grid-gap: 0;
     
     font-size: 0.7rem;
    
    
 }
-.noteFilterToday{
-    grid-column: 2/3;
-    display: inline-flex;
-    background-color: aliceblue;
-    justify-content: center;
-    align-items: center;
-    font-size: inherit;
-}
+
 #boardName , #noteDate , #noteTitle, #noteMessage{
     grid-column: 2/3;
+}
+#boardNameLabel{
+    grid-row: 1 / 2;
+}
+#boardName{
+    grid-row: 2 /3;
+}
+#noteDateLabel{
+    grid-row: 3 / 4;
+}
+#noteDate{
+    grid-row: 4 / 5;
+}
+#noteTitleLabel{
+    grid-row: 5 / 6;
+}
+#noteTitle{
+    grid-row: 6 / 7;
+}
+
+#noteMessageLabel{
+    display: flex;
+    grid-row: 7 / 8;
+}
+#noteMessage{
+    grid-row: 8 / 9;
+}
+.btn{
+    grid-column: 2/3;
+    grid-row: 9 / 10;
+}
+.noteFilterToday{
+    grid-column: 2/3;
+    grid-row: 10 / 11;
+    display: inline-flex;
+    
+    background-color: aliceblue;
+    justify-content: space-between;
+    align-items: center;
+    font-size: inherit;
 }
 #boardNameLabel , #noteDateLabel , #noteTitleLabel, #noteMessageLabel{
     grid-column: 2/3;
@@ -67,9 +100,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-.btn{
-    grid-column: 2/3;
-}
+
 .notesTableView{
    grid-column: 2/3;
    display: block;
@@ -262,7 +293,7 @@ body{
         width: 100%;
         display: grid;
         grid-template-columns: 10px 1fr 10px;
-        grid-template-rows: 2.5ch 3.5ch 2.5ch 3.5ch 2.5ch 3ch 2.5ch minmax(5ch,max-content) 3.5ch 3.5ch 1fr;
+        grid-template-rows: 2.5ch 3.5ch 2.5ch 3.5ch 2.5ch 3ch 2.5ch minmax(5ch,max-content) 3.5ch auto 1fr;
         grid-gap: 0;
         
         font-size: 0.7rem;
@@ -282,6 +313,8 @@ body{
   }
   textarea[autoresize] {
     display: block;
+   
     overflow: hidden;
     resize: none;
   }
+  
