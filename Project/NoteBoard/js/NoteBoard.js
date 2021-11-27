@@ -1,3 +1,5 @@
+console.log(yl.sayHello());
+
 var noteBoard;
 let noteBoardLocalStorage = 'NoteBoard';
  window.onload = () =>{
@@ -65,10 +67,13 @@ InitFromLocalStorage();
     if(noteTableBody)
         noteTableBody.innerHTML ="";
  }
+ var searchNote ="";
 function updateBoard(){
     
     ClearNoteParents();
-    noteBoard.GetNotes().sort((a,b) => a.date - b.date).forEach(item =>{
+    searchNote = document.getElementById('searchNote').value.toUpperCase();
+    let filteredNote = noteBoard.GetNotes().filter(filterTitle );
+    filteredNote.sort((a,b) => a.date - b.date).forEach(item =>{
         /* createTableNoteRow(item);  */
         createNote(item);
     })
@@ -112,7 +117,7 @@ function createNote(note )
     element.innerText = `${note.date.toDateString()} ${note.date.getHours()}:${note.date.getMinutes()}`;
     let elpasse = Date.now()- note.date;
     let noteFilterToday = document.getElementById("noteFilterToday").checked;
-   
+    
     noteElement.appendChild(element);
     element = document.createElement('p');
     element.className = 'gNoteMessage';
@@ -229,4 +234,12 @@ function OnDelete(e){
 function noteFilterTodayChanged(){
     console.log(document.getElementById("noteFilterToday").checked);
     updateBoard()
+}
+function onSearchNote(){
+    updateBoard();
+}
+
+function filterTitle(note){
+    let result = note.title.toUpperCase().includes(searchNote) || searchNote == "";
+    return result;
 }

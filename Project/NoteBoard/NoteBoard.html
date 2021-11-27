@@ -9,6 +9,7 @@
     <!-- <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="./css/NoteBoard.css">
     <script defer src="/js/bootstrap.bundle.min.js"></script>
+    <script defer src="./js/namespace.js"></script>
     <script defer src="./js/GeneralFunction.js"></script>
     <script defer src="./js/textarea.js"></script>
     <script defer src="./js/Note.js"></script>
@@ -38,8 +39,8 @@
             <div class="noteFilterToday">
                 <label for="noteFilterToday">Show today Task: </label>
                 <input name="noteFilterToday" type="checkbox" id="noteFilterToday" onchange="noteFilterTodayChanged()">
-                <label for="searchNote">Search Note</label>
-                <input type="text" name="searchNote" id="searchNote" onclick="searchNote()">
+                <label for="searchNote" onclick="onSearchNote()">Search Note</label>
+                <input type="text" name="searchNote" id="searchNote" >
             </div>
         </div>
         
