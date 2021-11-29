@@ -11,12 +11,12 @@
     --tablet-width: 320px;
     --desktop-width: 1224px;
 }
+
 body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-   /*  display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; */
+    overflow: hidden;
+}
+.noteBoardContainer{
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -25,20 +25,18 @@ body{
     font-size: 1rem;
     display: flex;
     flex-direction: column;
-    
 }
 .noteBoard{
     
     width: 100%;
-    display: grid;
-    grid-template-columns:  1fr;
+    
     margin-top: 10px;
     justify-content: center;
-
+    overflow: auto;
 }
 
 .container__input{
-    height: 100%;
+    
     width: 100%;
     display: grid;
     grid-template-columns: 10px 1fr 10px;
@@ -170,20 +168,7 @@ body{
     opacity: 1;
     border: 2px solid black;
   }
-/*   .gNoteClose:before, .gNoteClose:after {
-    position: absolute;
-    left: 14px;
-    content: ' ';
-    height: 2ch;
-    width: 4px;
-    background-color: #333;
-  }
-  .gNoteClose:before {
-    transform: rotate(45deg);
-  }
-  .gNoteClose:after {
-    transform: rotate(-45deg);
-  } */
+
 .gNoteTitle{
     grid-area: title;
     color: black;
@@ -262,7 +247,24 @@ body{
   .hide{
       display: none;
   }
-
+  .leftnotesNoteView{
+    display: flex;
+    overflow-y: auto;
+}
+.rightnotesNoteView{
+    display: flex;
+    overflow-y: auto;
+}
+.centernotesNoteView{
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    grid-area: center;
+    
+    margin: auto;
+ }
   @media screen and (min-width:320px){
     .noteBoard{
     
@@ -278,16 +280,7 @@ body{
         
     
     }
-    .centernotesNoteView{
-    
-        width: 95%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        grid-area: center;
-        overflow-y: scroll;
-        margin: auto;
-     }
+
      .container__input{
         height: 100%;
         width: 100%;
@@ -303,13 +296,24 @@ body{
     .leftnotesNoteView{
         height: 100%;
         grid-area: left;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
     .rightnotesNoteView{
+        height: 100%;
         grid-area: right;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
-
+    .centernotesNoteView{
+        height: 100%;
+        width: 95%;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        grid-area: center;
+        
+        margin: auto;
+     }
   }
   textarea[autoresize] {
     display: block;
