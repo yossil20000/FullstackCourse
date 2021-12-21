@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>save json to file using webspi</h1>
+    <button onclick="export2txt()">Export data to local txt file</button>
+    <script>
+        function export2txt() {
+  const originalData = {
+    members: [{
+        name: "cliff",
+        age: "34"
+      },
+      {
+        name: "ted",
+        age: "42"
+      },
+      {
+        name: "bob",
+        age: "12"
+      }
+    ]
+  };
+
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(originalData, null, 2)], {
+    type: "text/plain"
+  }));
+  a.setAttribute("download", "data.txt");
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+    </script>
+</body>
+</html>

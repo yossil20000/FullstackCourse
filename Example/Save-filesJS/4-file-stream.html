@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>File Writer</title>
+    <script>
+    async function saveFile() {
+      // (A) CREATE BLOB OBJECT
+      var myBlob = new Blob(["CONTENT"], {type: "text/plain"});
+
+      // (B) FILE HANDLER & FILE STREAM
+      const fileHandle = await window.showSaveFilePicker({
+        types: [{
+          description: "Text file",
+          accept: {"text/plain": [".txt"]}
+        }]
+      });
+      const fileStream = await fileHandle.createWritable();
+
+      // (C) WRITE FILE
+      await fileStream.write(myBlob);
+      await fileStream.close();
+    }
+    </script>
+  </head>
+  <body>
+    <input type="button" value="Save File" onclick="saveFile()"/>
+  </body>
+</html>

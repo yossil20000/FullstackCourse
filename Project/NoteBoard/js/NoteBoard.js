@@ -228,6 +228,7 @@ function ComapareNoteDate(noteA ,noteB)
     return 0;
 }
 
+
 function OnDelete(e){
     console.log(this);
 }
@@ -243,3 +244,5 @@ function filterTitle(note){
     let result = note.title.toUpperCase().includes(searchNote) || searchNote == "";
     return result;
 }
+
+fetch

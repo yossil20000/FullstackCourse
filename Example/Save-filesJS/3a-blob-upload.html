@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BLOB AJAX Upload</title>
+    <script>
+    function blobajax () {
+      // (A) CREATE BLOB OBJECT
+      var myBlob = new Blob(["CONTENT"], {type: "text/plain"});
+
+      // (B) FORM DATA
+      var data = new FormData();
+      data.append("upfile", myBlob);
+
+      // (C) AJAX UPLOAD TO SERVER
+      fetch("3b-upload.php", {
+        method: "POST",
+        body: data
+      })
+      .then((res) => { return res.text(); })
+      .then((txt) => { console.log(txt); });
+    }
+    </script>
+  </head>
+  <body>
+    <input type="button" value="Go" onclick="blobajax()"/>
+  </body>
+</html>

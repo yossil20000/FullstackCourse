@@ -1,0 +1,17 @@
+body{
+    background-color: #111;
+    color: #eee;
+}
+.container{
+    display: flex;
+    height: 50vh;
+    width: 50vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.hide{
+    display: none;
+}

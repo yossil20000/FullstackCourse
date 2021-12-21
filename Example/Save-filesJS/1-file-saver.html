@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BLOB To File Download</title>
+    <!-- (A) LOAD FILE SAVER -->
+    <!-- https://cdnjs.com/libraries/FileSaver.js -->
+    <!-- https://github.com/eligrey/FileSaver.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <script>
+    // (B) "SAVE AS"
+    var myFile = new File(["CONTENT"], "demo.txt", {type: "text/plain;charset=utf-8"});
+    saveAs(myFile);
+    </script>
+  </head>
+  <body></body>
+</html>
