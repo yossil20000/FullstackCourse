@@ -1,0 +1,60 @@
+
+
+let posts = getDataAsync(urlPosts).then( data => {
+  console.log(data);
+});
+
+let post = getDataAsync(getUrlUserId(urlPosts,1)).then( data => {
+  console.log(data);
+});
+
+let postForIndex = getDataAsync(getUrlItemId(urlCommnets,2)).then( data => {
+  console.log(data);
+});
+
+let users = getDataAsync(urlUsers).then( data => {
+  console.log(data);
+DrawUsers(data);
+});
+
+
+
+const containerUser = document.getElementById("containerUsers");
+function DrawUsers(users){
+  let userUl = document.createElement('ul');
+  userUl.id="userList";
+  
+  users.forEach(element => {
+    let li = document.createElement("li");
+    li.setAttribute("data-userId", element.id);
+    li.addEventListener('click', e => {
+      let uId = e.target.getAttribute("data-userId");
+      console.log(e.target.getAttribute("data-userId"));
+      /* e.target.innerHTML = "" */
+      let userUl = document.createElement('ul');
+     
+
+      let userUrl = getUrlUserId(urlTodos,uId);
+      let users = getDataAsync(userUrl).then( data => {
+        console.log(data);
+/*         data.forEach(element => {
+          let li = document.createElement("li");
+        li.innerHTML = `<span>${user.title}</span>`;
+      userUl.appendChild(li);
+     
+        }); 
+        e.target.appendChild(userUl);*.
+      });
+      
+    });
+    li.innerText = element.name;
+    userUl.appendChild(li);
+  });
+  containerUser.appendChild(userUl);
+}
+
+
+
+
+
+
