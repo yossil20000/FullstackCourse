@@ -36,24 +36,30 @@ function DrawUsers(users){
       getDataAsync(selectedUser).then(data => {
 user = data;
 console.log(user);
-      e.target.innerHTML ="";
-      e.target.innerHTML = user[0].name;
+      
       let users = getDataAsync(userTodoUrl).then(data => {
           
-          let todo
-          data.forEach(element =>{
-            console.log(element);
-            if(!todo)
-            {
-              todo = document.createElement('ul');
-todo.className = `userId-${}`
-            }
-            let todoItem = document.createElement('li');
-            todoItem.innerText = element.title;
-            todo.appendChild(todoItem);
-          });
-          if(todo)
-            e.target.appendChild(todo);
+          let todo = document.getElementsByClassName(`userId-${user[0].id}`);
+
+          if(todo.length == 0)
+          {
+            todo = document.createElement('ul');
+            todo.className = `userId-${user[0].id}`;
+            data.forEach(element =>{
+              console.log(element);
+             
+              let todoItem = document.createElement('li');
+              todoItem.innerText = element.title;
+              todo.appendChild(todoItem);
+            });
+
+              e.target.appendChild(todo);
+          }
+          else{
+            e.target.innerHTML ="";
+            e.target.innerHTML = user[0].name;
+          }
+
       });
       });
       
