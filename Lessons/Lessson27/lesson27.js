@@ -74,8 +74,11 @@ function DrawUsers(users){
   userUl.id="userList";
   users.forEach(elementUser => {
     let li = document.createElement("li");
+    /* let btn = document.createElement('button');
+    btn.setAttribute("data-userId", elementUser.id);
+    btn.addEventListener('click',UserShowMore); */
     li.setAttribute("data-userId", elementUser.id);
-    li.innerText = elementUser.name;
+    li.innerHTML = `<button  onClick="UserShowMore" data-userId=${elementUser.id}>Show More =: </button> <span onClick="DrawOnClick" data-userId=${elementUser.id} >${elementUser.name}</span> <span class=hidess>&lt;Mail: ${elementUser.email}&gt;&lt;City:${elementUser.address.city}&gt; &lt;Phone:${elementUser.phone}&gt;</span>`;
     li.addEventListener('click', DrawOnClick);
     userUl.appendChild(li);
   });
