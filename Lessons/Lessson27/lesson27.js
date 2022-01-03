@@ -25,8 +25,12 @@ async () =>{
 }
 )(); 
   
-function DrawOnClick(e){
-  let uId = e.target.getAttribute("data-userId");
+function DrawOnClick(e)
+{
+  DrawOnClickImp(e.target,true);
+}
+function DrawOnClickImp(element,showMore){
+  let uId = element.getAttribute("data-userId");
   let userTodoUrl = getUrlUserId(urlTodos,uId);
   let selectedUser = getUrlItemId(urlUsers,uId);
   let user;
@@ -50,11 +54,11 @@ console.log(user);
           todo.appendChild(todoItem);
         });
 
-          e.target.appendChild(todo);
+        element.appendChild(todo);
       }
       else{
-        e.target.innerHTML ="";
-        e.target.innerHTML = user[0].name;
+        element.innerHTML ="";
+        element.innerHTML = user[0].name;
       }
 
   });
@@ -62,11 +66,22 @@ console.log(user);
   
 
   
-  console.log(e.target.getAttribute("data-userId"));
+  console.log(element.getAttribute("data-userId"));
   /* e.target.innerHTML = "" */
   
 }
 
+function UserShowMore(e)
+{
+  let uId = e.target.getAttribute("data-userId");
+  /* let element = document.getElementsByTagName('li').find(item => {
+    let att = item.getAttribute('data-userId');
+    return att == 
+  }) */
+  let element = document.getElementsByClassName(`userId-${uId}`);
+  e.target.classList.toggle("hide");
+  DrawOnClickImp(element);
+}
 const containerUser = document.getElementById("containerUsers");
 function DrawUsers(users){
   containerUser.innerHTML = "";
@@ -78,8 +93,9 @@ function DrawUsers(users){
     btn.setAttribute("data-userId", elementUser.id);
     btn.addEventListener('click',UserShowMore); */
     li.setAttribute("data-userId", elementUser.id);
-    li.innerHTML = `<button  onClick="UserShowMore" data-userId=${elementUser.id}>Show More =: </button> <span onClick="DrawOnClick" data-userId=${elementUser.id} >${elementUser.name}</span> <span class=hidess>&lt;Mail: ${elementUser.email}&gt;&lt;City:${elementUser.address.city}&gt; &lt;Phone:${elementUser.phone}&gt;</span>`;
-    li.addEventListener('click', DrawOnClick);
+    
+    li.innerHTML = `<button  onClick="UserShowMore" data-userId=${elementUser.id}>Show More =: </button> <span onClick="DrawOnClick" data-userId=${elementUser.id} >${elementUser.name}</span> <span class=hide>&lt;Mail: ${elementUser.email}&gt;&lt;City:${elementUser.address.city}&gt; &lt;Phone:${elementUser.phone}&gt;</span>`;
+    /* li.addEventListener('click', DrawOnClick); */
     userUl.appendChild(li);
   });
   containerUser.appendChild(userUl);
