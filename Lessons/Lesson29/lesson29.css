@@ -1,0 +1,10 @@
+.containerCorona{
+height: 100%;
+width: 100vw;
+
+}
+#myDiv{
+    background-color: red;
+    height: 100px;
+    width: 100px;
+}

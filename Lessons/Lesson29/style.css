@@ -1,0 +1,24 @@
+﻿body {
+    direction: rtl;
+    width: 700px;
+    background-color: #ddd;
+    margin:0 auto;
+    
+}
+.clear {
+    clear: both;
+}
+
+h2 {
+    border-top: 1px solid red;
+    clear: both;
+    margin-top: 30px;
+}
+
+div.je-html-area {
+    direction: ltr;
+}
+
+span.code-snippet {
+    text-align: left;
+}
