@@ -9,4 +9,10 @@ $("#solve").click(function(){
     $('div .target6 input[type="checkbox"]').prop("checked",false);
     $('#parent1 #child').detach().appendTo('#parent2');
     $('#target8 input[type="text"]').prop('readonly', true);
+    $('#target10').width(function(n,c){
+        return c * 2;
+    }).height(function(n,c){
+        return c *2;
+    });
+    $("#target9 select  option:eq(1)").prop("selected",true);
 });
