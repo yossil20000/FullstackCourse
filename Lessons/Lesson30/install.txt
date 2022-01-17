@@ -1,0 +1,17 @@
+///
+npm packageManager of node.js
+//
+
+Create package.json to local directory
+npm init -y
+Install Express
+npm i Express
+install server fack
+npm i --save-dev nodemon
+
+// to define entry point:
+"scripts": {
+    
+    "devStart": "nodemon server.js"
+  },
+  // and the command is:> npm run devStart

@@ -1,0 +1,23 @@
+// site for package npmjs.com
+// install a package
+npm install "package name"
+// the package install to the local directory the packaes
+
+// To install after we delete the node_modules the install will look in the package-lock.json
+//> nmp install 
+
+// to make a server we need http server
+// we need "http" package.
+// in all computer there is "http" package
+// it installed in programfiles in Nodejs
+
+//Status group
+Information: 100
+Success: 200 .... 
+Redirection: 300
+Request Error: 400  // error in client side
+Server Error: 
+
+//http://127.0.0.1:3000/
+
+//filesystm package
