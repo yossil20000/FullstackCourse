@@ -1,0 +1,30 @@
+Modul client side
+//create one
+export default "name"
+import "name" from ""
+
+// Modoul server
+// One method
+
+module.exports= divide;
+// with name
+ module.exports.Yossi = divide;
+
+//using
+const divide = require("./serverMath");
+divide.Yossi
+
+//Second method good to export some 
+exports.mul = (val1,val2) => val1 * val2;
+exports.divide = (val1 , val2) => val1 / val2;
+
+
+צרו מודול שמקבל מספר ומחזיר האם המספר מתחלק ב 3 .
+6.	צרו מודול שמשתמש במודול מתרגיל 5  ומקבל מערך ומחזיר מערך /מדפיס לקונסול את כל המספרים במערך שמתחלקים ב 3.
+
+תרגיל נוסף לביצוע בכיתה/ בבית
+צרו מערכת שיודעת לחפש שם בקובץ/מערך
+המערכת תכיל את המודולים הבאים:
+1.	מודול שיודע לקרוא קובץ, להחזיר לי את הנתונים כטקסט . תקראו לו textFileModule
+2.	. מודול נוסף שמקבל נתונים כטקסט וממיר אותם למערך תקראו לו strToArray
+3.	מודול נוסף שיודע לקבל   מערך – ויודע לבדוק האם השם שנתתי לו נמצא כאחד מאיברי המערך. (אפשר  ב foreach) קראו לו findInArr
