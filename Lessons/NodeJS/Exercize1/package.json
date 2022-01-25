@@ -1,16 +1,21 @@
 {
-  "name": "lesson31",
+  "name": "exercize1",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "process.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./exampleProcess/server2.js",
+    "server": "node server.js",
+    "sWa": "node serverWithArgs.js",
+    "server3": "node ./example3/server3.js"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
   "dependencies": {
-    "axios": "^0.24.0",
-    "eol": "^0.9.1"
+    "axios": "^0.25.0"
   }
 }

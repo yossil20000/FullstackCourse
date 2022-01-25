@@ -2,11 +2,12 @@ const { rejects } = require("assert");
 const fileReader = require("fs");
 const fileReaderPromiss = require("fs/promises");
 const logger = require("./logs");
+logger.Log.called = "textFileModule.js";
 let readFile =  function(file,callback){
     let lines="";
     fileReader.readFile(file, 'utf-8', (err, data) => {
         if (err == null) {
-            logger.Log.info(`Data read: ${data}`);
+            logger.Log.info(`Data : ${data}`);
            callback(data);
         }
 
@@ -18,7 +19,14 @@ let readFile =  function(file,callback){
     
 };
 let readFileAsync = async function(file ,callback){
-    return data = await fileReaderPromiss.readFile(file,"utf-8")
+   try{
+    return data = await fileReaderPromiss.readFile(file,"utf-8");
+   }
+   catch(err)
+   {
+    return err;
+   }
+    
 }
 
 let readFilePromiss = (file) =>{
@@ -28,9 +36,17 @@ let readFilePromiss = (file) =>{
         });
     });
 };
-
+let readFileSync = function(file){
+    try{
+        return fileReader.readFileSync(file,"utf-8");
+    }
+    catch(err){
+        return err;
+    }
+}
 module.exports ={
     readFile: readFile,
     readFileAsync : readFileAsync,
-    readFilePromiss : readFilePromiss
+    readFilePromiss : readFilePromiss,
+    readFileSync : readFileSync
 };
