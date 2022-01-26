@@ -1,23 +1,46 @@
 const http = require("http");
 const fetch = require("./Lib/copyPlaceHolder");
+const writeFile = require("fs");
 const port = process.env.port || 3000;
 const url = "https://jsonplaceholder.typicode.com/users";
+const fileName = "./placeholder.txt";
+var index=0;
 const server = http.createServer((req,res) => {
      
-    const body = "<h1>Hello 1</h1>";
-    fetch.GetFromPlaceHolderAsync(url).then(
-         response => {
-            var data = JSON.parse(JSON.stringify(response.data));
-             console.log(data);
-             //res.writeHead(200,{'Content-Type': 'application/json' }); 
-             res.writeHead(200,{'Content-Type': 'text/html' }); 
-            //res.write(JSON.stringify(data[0]));
-            res.write(JsonToHtml(data));
-            res.end();
-         }
-     ).catch(err => {
-         console.log(err);
-     });
+    
+    if(writeFile.existsSync(fileName))
+    {
+        console.log("file exist");
+        res.writeHead(200,{'Content-Type': 'text/html' }); 
+        //res.write(JSON.stringify(data[0]));
+        
+        let readData = writeFile.readFileSync(fileName,{encoding:'utf8', flag:'r'});
+        console.log("Data after read");
+        console.log(readData);
+        res.write(`<h1>Read From file: ${fileName} Iteration:${index++}</h1>`)
+        res.write(JsonToHtml(JSON.parse(readData)));
+        res.end();
+    }
+    else
+    {
+        index=0;
+        fetch.GetFromPlaceHolderAsync(url).then(
+            response => {
+               var data = JSON.parse(JSON.stringify(response.data));
+                console.log(data);
+                //res.writeHead(200,{'Content-Type': 'application/json' }); 
+                res.writeHead(200,{'Content-Type': 'text/html' }); 
+               //res.write(JSON.stringify(data[0]));
+               writeFile.writeFileSync(fileName,JSON.stringify(response.data));
+               res.write(`<h1>Read From URL: ${url}</h1>`);
+               res.write(JsonToHtml(data));
+               res.end();
+            }
+        ).catch(err => {
+            console.log(err);
+        });
+    }
+   
     
     /*  res.setHeader('Content-Length', Buffer.byteLength(body));
      res.setHeader('Content-Type' ,'text/html');
