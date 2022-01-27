@@ -1,6 +1,7 @@
 const http = require("http");
 const fetch = require("./Lib/copyPlaceHolder");
 const writeFile = require("fs");
+const { default: axios } = require("axios");
 const port = process.env.port || 3000;
 const url = "https://jsonplaceholder.typicode.com/users";
 const fileName = "./placeholder.txt";
@@ -40,7 +41,7 @@ const server = http.createServer((req,res) => {
             console.log(err);
         });
     }
-   
+
     
     /*  res.setHeader('Content-Length', Buffer.byteLength(body));
      res.setHeader('Content-Type' ,'text/html');

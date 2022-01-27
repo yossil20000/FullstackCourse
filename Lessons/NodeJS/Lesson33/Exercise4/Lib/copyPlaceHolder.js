@@ -25,6 +25,11 @@ let placeHolderAsync =  function(url){
     }
 }
 
+const func = async (req,res) => {
+    const dataUrl = await axios.get(url);
+    return dataUrl.data;
+}
+
 module.exports = {
     GetFromPlaceHolder : placeholder,
     GetFromPlaceHolderAsync: placeHolderAsync
