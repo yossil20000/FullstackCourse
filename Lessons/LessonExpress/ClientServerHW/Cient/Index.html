@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./Css/main.css">
-    <script defer src="./Scripts/script.js" type="module"></script>
-
-    <title>$Document</title>
+    <script defer src="./Scripts/clientScript.js" type="module"></script>
+    <script defer src="./Scripts/viewScript.js"></script>
+    <title>Document</title>
 </head>
 <body>
     <h1>User Manager </h1>
     <div class="addUserBtn">
-        <label for="addUser">Add new user:</label>  
-        <button onclick="addUser()">Add User</button>
+        <label for="AddUser">Add new user:</label>  
+        <button onclick="AddUser(this)">Add User</button>
     </div>
     <table class="usersTable">
         <thead>
@@ -32,8 +32,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
+                <td><button onclick="OnEdit(this)"  id="3"></button></td>
+                <td><button onclick="OnDelete(this)"  id="3"></button></td>
             </tr>
         </tbody>
     </table>

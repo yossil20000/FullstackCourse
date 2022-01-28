@@ -1,4 +1,3 @@
-import fetch from "../Moduls/fetch.js";
 import { sumOfElement,arrMul,arrLastNItems,arrRemoveAt,sortBy ,filterBy,newIndexArray,arrMakUniq,arrShuffel,arrShuffelSwift} from "../Moduls/arrayFunction.js";
 const url = "";
 const arr = [1,2,3,4,5,6];
@@ -88,13 +87,6 @@ console.log(`filter: ${arr} filtered:${filterBy(arr,(item) => item > 3)}`);
 console.log(`new array: ${newIndexArray(10)}`);
 console.log(`remove duplecate: ${dupArr}  => ${arrMakUniq(dupArr)} Original: ${dupArr}`);
 
-(  
-    
-    async () =>{
-        
-        await fetch(url);
-    }
-    
-)();
+
 
 

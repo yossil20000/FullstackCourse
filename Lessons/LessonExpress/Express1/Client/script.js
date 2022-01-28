@@ -1,8 +1,7 @@
 
   
         // API for get requests
-        let fetchRes = fetch(
-"http://127.0.0.1:3015/");
+        let fetchRes = fetch("http://127.0.0.1:3015/");
   
         // fetchRes is the promise to resolve
         // it by using.then() method

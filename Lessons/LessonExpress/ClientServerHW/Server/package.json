@@ -1,18 +1,19 @@
 {
-  "name": "lesson31",
+  "name": "clientserverhw",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "Server": "nodemon ./server/server.js"
+    "Server": "nodemon ./server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.24.0",
-    "eol": "^0.9.1"
+    "cors": "^2.8.5",
+    "eol": "^0.9.1",
+    "express": "^4.17.2"
   }
 }
