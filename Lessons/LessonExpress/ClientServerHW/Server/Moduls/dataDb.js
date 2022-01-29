@@ -1,5 +1,5 @@
 const fileSystems = require("fs").promises;
-
+const fileDb = "./data.json";
 
 async function  getAllUsers() {
     try
@@ -9,7 +9,7 @@ async function  getAllUsers() {
             console.log(data);
             return data; 
         }); */
-        const data = await fileSystems.readFile("./data.json","utf-8");
+        const data = await fileSystems.readFile(fileDb,"utf-8");
         return JSON.parse(data);
     }
     catch(err)
@@ -18,6 +18,18 @@ async function  getAllUsers() {
     }
      
 }
+async function deleteUser(id) {
+    try{
+        let data = await getAllUsers();
+        data = data.filter(item => item.id != id);
+        await fileSystems.writeFile(fileDb,JSON.stringify(data));
+        return data;
+    }
+    catch(err){
+        console.error(err);
+    }
+}
 module.exports = {
-    getAllUsers: getAllUsers
+    getAllUsers: getAllUsers,
+    deleteUser: deleteUser
 }

@@ -22,6 +22,15 @@ server.listen(port , () => {
     console.log(`Server run on port: ${port}`);
 });
 
+server.delete('/delete/:id', async (req,res,next) =>{
+try{
+    const data = await dataBase.deleteUser(req.params.id);
+    res.send(data);
+}
+catch(err){
+    console.error(err);
+}
+});
 /* (
     async () =>{
         const data = await dataBase.getAllUsers();

@@ -8,3 +8,8 @@ const url = `http://127.0.0.1:3000/`;
     }
     
 )();
+
+async function fetchUrl1(url) {
+    let data = await fetchUrl(url);
+    DrawUsers(data);
+}
