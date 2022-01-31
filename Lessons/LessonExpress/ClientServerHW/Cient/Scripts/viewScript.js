@@ -19,7 +19,7 @@ function OnDelete(e) {
     (
         
         async () =>{
-            const data = await fetchUrl(`127.0.0.1:3000/delete/${e.id}`);
+            const data = await axios.delete(`http://localhost:3000/delete/${e.id}`);
             DrawUsers(data);
 
         }

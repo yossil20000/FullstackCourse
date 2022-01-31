@@ -1,4 +1,5 @@
 const fileSystems = require("fs").promises;
+
 const fileDb = "./data.json";
 
 async function  getAllUsers() {
@@ -21,7 +22,9 @@ async function  getAllUsers() {
 async function deleteUser(id) {
     try{
         let data = await getAllUsers();
-        data = data.filter(item => item.id != id);
+        
+        console.log(data);
+        data = data.filter(item => item.id !== Number(id));
         await fileSystems.writeFile(fileDb,JSON.stringify(data));
         return data;
     }
@@ -29,7 +32,53 @@ async function deleteUser(id) {
         console.error(err);
     }
 }
+async function updateUser(user){
+    try{
+        let data = await getAllUsers();
+        const dataUpdate = data.map((item) => {
+            if(item.id === user.id)
+            {
+                item = user;
+                return item
+            }
+            return item;
+        })
+        await fileSystems.writeFile(fileDb,JSON.stringify(dataUpdate));
+        return dataUpdate;
+    }
+    catch(err){
+        console.error(err);
+    }
+}
+async function addUser(item){
+    try{
+        let data = await getAllUsers();
+        console.log(`Data from file id:${item.id} data.id:${data[0].id}:\n`);
+        const find =  data.find((user) => user.id === Number(item.id));
+        
+        if(find){
+            console.log(`AddUser Found: ${find.id} `);
+            return `{"Success": false,"Message":${find.id} Already Exist }`
+        }
+        else{
+            
+            console.log(`AddUser Not Found: ${find} `);
+            data.push(item);
+            await fileSystems.writeFile(fileDb,JSON.stringify(data));
+            return item;
+        }
+        //data.push(item);
+        
+        //await fileSystems.writeFile(fileDb,JSON.stringify(data));
+        
+    }
+    catch(err){
+        console.error(err);
+    }
+}
 module.exports = {
     getAllUsers: getAllUsers,
-    deleteUser: deleteUser
+    deleteUser: deleteUser,
+    addUser:addUser,
+    updateUser : updateUser
 }
