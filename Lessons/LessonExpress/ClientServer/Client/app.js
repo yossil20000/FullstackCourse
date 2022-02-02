@@ -1,5 +1,6 @@
 import 'regenerator-runtime/runtime';
 import axios from 'axios';
+import userItem from "./Models/user"; 
 
 const BASE_URL = 'http://127.0.0.1:3000';
 const getTodoItems = async () => {
@@ -38,16 +39,36 @@ const form = document.querySelector('form');
 form.addEventListener('submit', async event => {
     event.preventDefault();
     const title = document.querySelector('#new-todos__title').value;
-    const todo = {
+    const username = document.querySelector('#new-todos__username').value;
+    const email = document.querySelector('#new-todos__email').value;
+    /* const todo = {
     Id:1,
-    name: title
-    };
-    const submitTodoItem = await addTodoItem(todo);
+    name: title,
+    username: "fff"
+    }; */
+    //let todo = eval("(" + userItem + ")");
+/*     let todo = {
+        id: "",
+        name:"",
+        username:""
+
+    } */
+    
+    userItem.id;
+    //let userItem1 = {id:0,name:"",username:"Karianne",email:"Julianne.OConner@kory.org",address:{street:"Hoeger Mall",suite:"Apt. 692",city:"South Elvis",zipcode:"53919-4257",geo:{lat:"29.4572",lng:"-164.2990"}},phone:"493-170-9623 x156",website:"kale.biz",company:{name:"Robel-Corkery",catchPhrase:"Multi-tiered zero tolerance productivity",bs:"transition cutting-edge web services"}}
+    userItem.id = 46;
+    userItem.name = title;
+    userItem.username = username;
+    userItem.email = email;
+    console.log("To do: ",userItem);
+    const submitTodoItem = await addTodoItem(userItem);
     updatetodoList(submitTodoItem);
 });
 
 export const addTodoItem = async todo => {
     try{
+        
+        console.log(todo);
         const response = await axios.post(`${BASE_URL}/placeholder`,todo);
         const newTodoItem = response.data;
         console.log(`added new item!`, newTodoItem);

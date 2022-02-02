@@ -86,18 +86,21 @@ async function addUser(item){
     try{
         let data = await getAllUsers();
         console.log(`Data from file id:${item.id} data.id:${data[0].id}:\n`);
-        const find =  data.find((user) => user.id === Number(item.id));
+        //const find =  data.find((user) => user.id === Number(item.id));
         
-        if(find){
+        if(false){
             console.log(`AddUser Found: ${find.id} `);
             return `{"Success": false,"Message":${find.id} Already Exist }`
         }
         else{
             
-           /*  data.sort( (left, right) => Number(left.id) < Number(right.id) );
-            const nextId = Number(data[data.length -1].id) + 1;
+           data.sort( (left, right) => Number(left.id) < Number(right.id) );
+            
+           const nextId = Number(data[data.length -1].id) + 1;
             console.log("next Id ", nextId);
-            item.id = nextId;  */
+            item.id = nextId;  
+            console.log("nextIf", nextId);
+            item.id = nextId;
             data.push(item);
             await jsonfile.writeFile(fileDb,data);
             return `{"Success": true,"Message":${item.id} Added }`
