@@ -1252,3 +1252,11 @@ Lessons/L05/node_modules/
 Lessons/LessonExpress/ClientServerHW/node_modules/
 
 Lessons/LessonExpress/ClientServerHW/Server/node_modules/
+
+Lessons/LessonExpress/ClientServer/Client/.cache/
+
+Lessons/LessonExpress/ClientServer/Client/node_modules/
+
+Lessons/LessonExpress/ClientServer/Client/dist/
+
+Lessons/LessonExpress/ClientServer/Server/node_modules/
