@@ -1,11 +1,11 @@
 import 'regenerator-runtime/runtime';
 import axios from 'axios';
 
-const BASE_URL = 'http://127.0.0.1:3000';
+const BASE_URL = 'https://jsonplaceholder.typicode.com';
 const getTodoItems = async () => {
     try{
-        const response = await axios.get(`${BASE_URL}/placeholder`);
-        const todoItems = response.data.data;
+        const response = await axios.get(`${BASE_URL}/todos?_limit=5`);
+        const todoItems = response.data;
         console.log(`GET: Here's the list of todos`,todoItems);
         return todoItems;
     }
@@ -16,7 +16,7 @@ const getTodoItems = async () => {
 const createTodoElement = item => {
     const todoElement = document.createElement('li');
     todoElement.id = item.id;
-    todoElement.appendChild(document.createTextNode(item.name));
+    todoElement.appendChild(document.createTextNode(item.title));
     todoElement.onclick = async event => await removeTodoElement(event,todoElement);
     return todoElement;
 }
@@ -39,8 +39,9 @@ form.addEventListener('submit', async event => {
     event.preventDefault();
     const title = document.querySelector('#new-todos__title').value;
     const todo = {
-    Id:1,
-    name: title
+userId:1,
+title: title,
+completed:  false
     };
     const submitTodoItem = await addTodoItem(todo);
     updatetodoList(submitTodoItem);
@@ -48,7 +49,7 @@ form.addEventListener('submit', async event => {
 
 export const addTodoItem = async todo => {
     try{
-        const response = await axios.post(`${BASE_URL}/placeholder`,todo);
+        const response = await axios.post(`${BASE_URL}/todos`,todo);
         const newTodoItem = response.data;
         console.log(`added new item!`, newTodoItem);
         return newTodoItem;
@@ -59,7 +60,7 @@ export const addTodoItem = async todo => {
 
 export const deleteTodoItem = async id =>{
 try{
-    const response = await axios.delete(`${BASE_URL}/placeholder/${id}`);
+    const response = await axios.delete(`${BASE_URL}/todos/${id}`);
     console.log(`Deleted Todo Id ${id}`);
     return response.data;
 
