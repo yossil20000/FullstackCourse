@@ -2,7 +2,7 @@
 const jsonfile = require('jsonfile');
 var path = require('path');
 
-const fileDb = path.resolve("data","data.json");
+const fileDb = path.resolve("data","users.json");
 
 async function  getAllUsers() {
     try
