@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- <script src="https://kit.fontawesome.com/25e06886ea.js" crossorigin="anonymous"></script> -->
+    <script src="https://kit.fontawesome.com/25e06886ea.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/todo.css">
+    <script ></script>
+    <title>Todo List</title>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="todo__header">ToDo List</div>
+            <div class="todo__logo">
+                <i class="fas fa-list-alt"></i>
+            </div>
+            <div class="todo__item_newitem">
+                <!-- <div class="newitem-lable">Enter new task</div> -->
+                <div class="newitem-input"><input type="text" placeholder="enter new todo" id="input-todo"></div>
+                <!-- <div class="newitem-button"><button>Add</button></div> -->
+                <button class="newitem-button action-btn" id="addTodo" ><i class="fas fa-sticky-note" style="color: royalblue;"></i></button>
+            </div>
+            <div class="todo__item_select">
+                <div class="item_select-filter">
+                    <select name="" id="select-filter" onchange="OnFilterChanged()">Select Todo</select>
+                </div>
+                <div class="item_select-sort">
+                    <select name="" id="select-sort" onchange="OnSortChanged()"></select>
+                </div>
+            </div>
+            <div class="todo__items_list">
+               <div class="todo__items_item" id="todo-d1">
+                    <!-- <div class="item-complete">
+                        <div>Completed:</div>
+                        <label class="custom-checkbox">
+                            <input type="checkbox" onchange="OnCompletedChanged(this)" id="completed-1"/>
+                           
+                            <i class="fa fa-fw fa fa-check checked" ></i>
+                            <i class="fa fa-fw fa fa-times-circle unchecked" style="color: red;"></i>
+                        </label>    
+         
+                    </div>
+                    
+                    <div class="item-title">title</div>
+                    <div class="item-actions">
+                        <button class="action-btn" id="edit-1" onclick="OnEditItem(this)"><i class="fas fa-pencil-alt" style="color: royalblue;"></i></button>
+                        <button class="action-btn" id=delete-1 onclick="OnDeleteItem(this)"><i class="fas fa-trash-alt" style="color:red"></i></button>
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script src="app.js"></script>
+</body>
+
+</html>
+                <!--  
+                <div class="todo__items_item" id="itemid2">
+                    <div class="item-complete"><input type="checkbox"></div>
+                    <div class="item-title"><label for="">roro vvdvvckxccv vvkk</label></div>
+                    <div class="item-actions">Actions</div>
+                </div> -->
