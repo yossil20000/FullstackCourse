@@ -27,7 +27,7 @@ router.get('/search', async function(req,res,next){
     }
     catch(errors){
         console.errors(errors);
-        res.status(201).json({"success": false, "message": errors});
+        return res.status(201).json({"success": false, "message": errors});
     }
     
 });
