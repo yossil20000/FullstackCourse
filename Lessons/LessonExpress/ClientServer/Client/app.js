@@ -7,7 +7,9 @@ const BASE_URL = 'http://127.0.0.1:3000';
 const BASE_TODOS_URL = `${BASE_URL}/todos`;
 const TODOS_GET = `${BASE_TODOS_URL}/`;
 const TODOS_SEARCH = `${BASE_TODOS_URL}/search/`;
+const USERS_GET = `${BASE_URL}/placeholder/`;
 let todoList;
+let usersList;
 const getTodoItems = async () => {
     try{
         const response = await axios.get(`${BASE_TODOS_URL}/`);
@@ -17,6 +19,17 @@ const getTodoItems = async () => {
     }
     catch(errors){
         console.error(errors);
+    }
+}
+const getUsers = async () =>{
+    try{
+        const response = await axios.get(USERS_GET);
+        const usersItems = response.data.data;
+        console.log(`GET: Here's the list of todos`, usersItems);
+        return usersItems;
+    }   
+    catch(errors){
+        console.log(errors);
     }
 }
 function getId(id){
@@ -158,11 +171,7 @@ const updatetodoList =  (todoItems) => {
     }
 };
 
-const main = async () => {
-    todoList =await getTodoItems(); 
-    updatetodoList(todoList);
-    
-};
+
 
 
 
@@ -195,4 +204,18 @@ const removeTodoElement = async (event,element) => {
     const id = element.id;
     await deleteTodoItem(id);
 }
+
+
+const main = async () => {
+    const response = await Promise.all(
+    [ getTodoItems() , getUsers()]
+    );
+    /* todoList =await getTodoItems(); 
+    usersList = await  */
+    todoList = response[0];
+    usersList = response[1];
+
+    updatetodoList(todoList);
+    
+};
 main();

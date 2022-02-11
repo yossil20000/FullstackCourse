@@ -157,3 +157,15 @@ exports.updateTasks = async (tasks) => {
         throw errors;
     }
 };
+exports.updateTasksCompleted = async (tasksId, done ) => {
+    try{
+        console.log(`id: ${tasksId} done:${done}`)
+        const collection = await tasksCollection.findOneAndUpdate(({"id": tasksId}),{ $set: { completed: done } }, {new:false,upsert: true,returnOriginal: true});
+        console.log(`updateTasksCompleted Result: ${JSON.stringify(collection)}`);
+        return collection;
+    }
+    catch(errors){
+        console.error(errors);
+        throw errors;
+    }
+};

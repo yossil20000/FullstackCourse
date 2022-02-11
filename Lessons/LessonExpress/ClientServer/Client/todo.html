@@ -28,11 +28,15 @@
                 <button class="newitem-button action-btn" id="addTodo" ><i class="fas fa-sticky-note" style="color: royalblue;"></i></button>
             </div>
             <div class="todo__item_select">
-                <div class="item_select-filter">
-                    <select name="" id="select-filter" onchange="OnFilterChanged()">Select Todo</select>
+                <div class="item_select-filter" >
+                    <select name="" id="select-filter">
+                    </select>
                 </div>
                 <div class="item_select-sort">
-                    <select name="" id="select-sort" onchange="OnSortChanged()"></select>
+                    <button class="btn-sort">Sort By Name</button>
+                    <button class="btn-sort">Completed Task</button>
+                    <button class="btn-sort">Un Completed</button>
+
                 </div>
             </div>
             <div class="todo__items_list">
@@ -58,7 +62,7 @@
             </div>
         </div>
     </section>
-    <script src="app.js"></script>
+    <script src="appMongo.js"></script>
 </body>
 
 </html>

@@ -3,7 +3,7 @@ const res = require('express/lib/response');
 var router = express.Router();
 var db = require("../MongoDB/controller");
 
-router.get('/', async function (req, res, next) {
+router.get('/users', async function (req, res, next) {
     try {
         const result = await db.getAllUsers();
         return res.status(201).json({ "success": true, "elements": result.length, "data": result });
@@ -13,7 +13,7 @@ router.get('/', async function (req, res, next) {
         return res.status(401).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
     }
 });
-router.get('/search', async function (req, res, next) {
+router.get('/users/search', async function (req, res, next) {
     const { id, name, limit } = req.query;
     try {
         if (req.query) {
@@ -29,7 +29,7 @@ router.get('/search', async function (req, res, next) {
 
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/tasks/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
         if (id) {
@@ -43,7 +43,7 @@ router.delete('/:id', async (req, res, next) => {
     }
 });
 
-router.delete('/tasks/:userId', async (req, res, next) => {
+router.delete('/tasks/user/:userId', async (req, res, next) => {
 
     try {
         const { userId } = req.params;
@@ -72,7 +72,7 @@ router.get('/tasks', async (req, res, next) => {
     }
 });
 
-router.get('/users/:userId/tasks', async (req, res, next) => {
+router.get('/tasks/user/:userId', async (req, res, next) => {
 
     try {
         const { userId } = req.params;
@@ -116,4 +116,25 @@ router.put('/tasks', async (req,res,next) => {
     }
 });
 
+router.put('/tasks/:id/completed', async (req,res,next) => {
+    try {
+       const {id} = req.params;
+       const {done} = req.query;
+       console.log(`id: ${id} Done: ${done}`);
+       if(id && done)
+       {
+        
+        const result = await db.updateTasksCompleted(Number(id), done );
+        return res.status(201).json({ "success": true, "elements": result.length ,"data": result });
+        
+       }
+       return res.status(401).json({ "success": false, "message": "please enter task id and done= true/false" });
+       //let result = {}
+       //return res.status(201).json({ "success": true, "elements": result.length ,"data": req.body });
+    }
+    catch (errors) {
+        console.log(errors);
+        return res.status(401).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
+    }
+});
 module.exports = router;
