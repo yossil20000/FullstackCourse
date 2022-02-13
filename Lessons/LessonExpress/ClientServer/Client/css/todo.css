@@ -7,6 +7,7 @@
 body{
      height: 100vh;
     width: 100vw;
+    font-size: 0.6rem;
 }
 .section{
     
@@ -16,12 +17,12 @@ body{
 
 }
 .container{
-    background-color: rgb(243, 239, 233);
+    background-color: rgba(250, 249, 246, 0.884);
     display: grid;
     margin: 0px 3px;
     margin-top: 2px;
     margin-bottom: 2px;
-    height: 100%;
+    /* height: 100%; */
     grid-template-columns: 00px 1fr 1fr 1fr 1fr 0px;
     grid-template-areas: 
     ". logo header header . ."
@@ -29,7 +30,8 @@ body{
     ". item-select item-select item-select item-select ."
     ". item-list item-list item-list item-list ." ;
     grid-template-rows: 5ch 6ch auto 1fr;
-    border-radius: 3%;
+    border-radius: 5px;
+    
 }
 .container .todo__header{
     display: flex;
@@ -49,20 +51,21 @@ body{
 }
 .container .todo__item_newitem{
     grid-area: new-item;
-    display: grid;
-    grid-template-columns: 6fr 1fr;
-    grid-template-areas: 
-     "add-input add-input add-button"  ;
+    display: flex;
+    /* grid-template-columns: 6fr 1fr; */
+    /* grid-template-areas:      "add-input add-input add-button"  ; */
     
     /* background-color: aquamarine; */
-    align-content: center;
+    align-content: stretch;
+    justify-content: space-evenly;
+    align-items: center;
 }
-.todo__item_newitem .newitem-lable{
+/* .todo__item_newitem .newitem-lable{
     display: flex;
     grid-area: add-lable;
     justify-content: center;
     padding-left:3px ;
-}
+} */
 .todo__item_newitem .newitem-input{
     display: flex;
     grid-area: add-input;
@@ -101,6 +104,7 @@ body{
     /* grid-area: item-sort; */
     align-items: center;
     justify-content: space-around;
+    margin: 10px;
 }
 .btn-sort{
     border-radius: 5px;
@@ -113,15 +117,18 @@ body{
 
 .todo__item_select .item_select-filter{
     display: flex;
-    height: 3ch;
+    height: 4ch;
     /* grid-area: item-filter; */
     align-items: center;
     justify-content: center;
-}
-
-#select-filter{
     width: 90%;
 }
+.item_select-filter::before{
+    content: "Sort By Email:";
+}
+ #select-filter{
+    width: 90%;
+} 
 #select-sort{
     width: 90%;
 }
@@ -139,7 +146,7 @@ body{
     grid-template-areas:  "item-title item-title" "item-cheack item-actions";
     grid-template-columns: 1fr  1fr;
     grid-template-rows:6ch 3ch;
-    
+ 
     /* background-color: rgb(196, 168, 223); */
 }
 
@@ -150,7 +157,7 @@ body{
     align-items: center;
     font-size: 1ch;
     color: #66bb6a;
-    border: #fff 1px solid;
+    
     margin-left: 2px;
 }
 .todo__items_item .item-title{
@@ -164,9 +171,14 @@ body{
     align-items: center;
     font-size: 1ch;
     color: orange;
-    border: #fff 1px solid;
+    
     margin-right: 2px;
     margin-left: 2px;
+}
+.border{
+    border: rgb(160, 152, 152) 1px solid;
+    border-radius: 3px;
+    margin: 2px;
 }
 
 .action-btn{

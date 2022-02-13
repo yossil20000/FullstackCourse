@@ -10,7 +10,7 @@ router.get('/users', async function (req, res, next) {
     }
     catch (errors) {
         console.log(errors);
-        return res.status(401).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
+        return res.status(500).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
     }
 });
 router.get('/users/search', async function (req, res, next) {
@@ -24,7 +24,7 @@ router.get('/users/search', async function (req, res, next) {
     }
     catch (errors) {
         console.error(errors);
-        return res.status(401).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
+        return res.status(500).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
     }
 
 });
@@ -39,7 +39,7 @@ router.delete('/tasks/:id', async (req, res, next) => {
     }
     catch (errors) {
         console.log(errors);
-        return res.status(401).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
+        return res.status(500).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
     }
 });
 
@@ -52,11 +52,11 @@ router.delete('/tasks/user/:userId', async (req, res, next) => {
             const result = await db.deletetodoByUserId(Number(userId));
             return res.status(201).json({ "success": true, "elements": result.length , "data": result });
         }
-        return res.status(401).json({ "success": false, "message": "pleae enter liggal userid" });
+        return res.status(400).json({ "success": false, "message": "pleae enter liggal userid" });
     }
     catch (errors) {
         console.log(errors);
-        return res.status(401).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
+        return res.status(500).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
     }
 });
 
@@ -68,7 +68,7 @@ router.get('/tasks', async (req, res, next) => {
     }
     catch (errors) {
         console.log(errors);
-        return res.status(401).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
+        return res.status(500).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
     }
 });
 
@@ -82,7 +82,7 @@ router.get('/tasks/user/:userId', async (req, res, next) => {
     }
     catch (errors) {
         console.log(errors);
-        return res.status(401).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
+        return res.status(500).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
     }
 });
 
@@ -97,22 +97,27 @@ router.post('/tasks', async (req,res,next) => {
     }
     catch (errors) {
         console.log(errors);
-        return res.status(401).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
+        return res.status(500).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
     }
 });
 
 router.put('/tasks', async (req,res,next) => {
     try {
        
-       console.log(`tasks: ${req.body}`);
-       const result = await db.updateTasks(req.body);
-       return res.status(201).json({ "success": true, "elements": result.length ,"data": result });
+       console.log(`tasks: ${JSON.stringify(req.body)}`);
+       if(req.body.id && req.body.id > 0)
+       {
+        const result = await db.updateTasks(req.body);
+        return res.status(201).json({ "success": true, "elements": result.length ,"data": result });
+       }
+       return res.status(400).json({ "success": false, "message": "pleae enter liggal item id" });
+       
        //let result = {}
        //return res.status(201).json({ "success": true, "elements": result.length ,"data": req.body });
     }
     catch (errors) {
         console.log(errors);
-        return res.status(401).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
+        return res.status(500).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
     }
 });
 
@@ -128,13 +133,13 @@ router.put('/tasks/:id/completed', async (req,res,next) => {
         return res.status(201).json({ "success": true, "elements": result.length ,"data": result });
         
        }
-       return res.status(401).json({ "success": false, "message": "please enter task id and done= true/false" });
+       return res.status(400).json({ "success": false, "message": "please enter task id and done= true/false" });
        //let result = {}
        //return res.status(201).json({ "success": true, "elements": result.length ,"data": req.body });
     }
     catch (errors) {
         console.log(errors);
-        return res.status(401).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
+        return res.status(500).json({ "success": false, "error_name": errors.name, "error_message": errors.message  });
     }
 });
 module.exports = router;

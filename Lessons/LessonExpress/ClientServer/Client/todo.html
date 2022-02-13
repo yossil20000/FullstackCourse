@@ -23,24 +23,25 @@
             </div>
             <div class="todo__item_newitem">
                 <!-- <div class="newitem-lable">Enter new task</div> -->
-                <div class="newitem-input"><input type="text" placeholder="enter new todo" id="input-todo"></div>
+                <input  type="text" placeholder="enter new todo" id="input-todo">
                 <!-- <div class="newitem-button"><button>Add</button></div> -->
                 <button class="newitem-button action-btn" id="addTodo" ><i class="fas fa-sticky-note" style="color: royalblue;"></i></button>
             </div>
             <div class="todo__item_select">
-                <div class="item_select-filter" >
+                <div class="item_select-filter" id="item_select-filter">
                     <select name="" id="select-filter">
                     </select>
                 </div>
                 <div class="item_select-sort">
-                    <button class="btn-sort">Sort By Name</button>
-                    <button class="btn-sort">Completed Task</button>
-                    <button class="btn-sort">Un Completed</button>
+                    <button class="btn-sort" id="btn-sort">Sort By Name</button>
+                    <button class="btn-sort" id="btn-filter-completed">Completed Task</button>
+                    <button class="btn-sort" id="btn-filter-uncompleted">Un Completed</button>
+                    <button class="btn-sort" id="btn-filter-all">All Tasks</button>
 
                 </div>
             </div>
             <div class="todo__items_list">
-               <div class="todo__items_item" id="todo-d1">
+               <div class="todo__items_item " id="todo-d1">
                     <!-- <div class="item-complete">
                         <div>Completed:</div>
                         <label class="custom-checkbox">
@@ -62,6 +63,7 @@
             </div>
         </div>
     </section>
+    <script src="todo-html.js"></script>
     <script src="appMongo.js"></script>
 </body>
 

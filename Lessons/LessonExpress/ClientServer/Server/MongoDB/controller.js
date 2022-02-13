@@ -149,8 +149,15 @@ exports.addTasks = async (tasks) => {
 exports.updateTasks = async (tasks) => {
     try{
         console.log(`Tasks: ${tasks} id:${tasks.id}`)
-        const collection = await tasksCollection.findOneAndUpdate(({id: tasks.id}),{$set: tasks}, {new:false,upsert: true,returnOriginal: true});
-        return collection;
+        if(tasks.id)
+        {
+            const collection = await tasksCollection.findOneAndUpdate(({id: tasks.id}),{$set: tasks}, {new:false,upsert: true,returnOriginal: true});
+            return collection;
+        }
+        else{
+            
+        }
+        
     }
     catch(errors){
         console.error(errors);
