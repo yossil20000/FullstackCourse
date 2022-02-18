@@ -12,19 +12,25 @@ block content
                 - authors.sort(function(a,b){let textA = a.family_name.toUpperCase(); let textB = b.family_name.toUpperCase(); return (textA - textB) ? -1 : (textA > textB) ? 1  : 0 ; }) 
                 for author in authors 
                     if book 
-                        option(value=author._id selected=(author._id.toString()=== book.author._id.toString() ? 'selected' : false )) #{author.name} 
+                        option(
+                        value=author._id
+                        selected=(
+                            author._id.toString()==book.author._id
+                            || author._id.toString()==book.author
+                        ) ? 'selected' : false
+                        ) #{author.name}
                     else 
                         option(value=author._id) #{author.name} 
         div.form-group 
             label(for="summary") Summary: 
-            textarea#summary.form-control(type='textarea' placeholder='summary of book' name="summary") 
+            textarea#summary.form-control(type='textarea' placeholder='summary of book' name="summary" value=(undefined===book ? '' : book.summary) required='true') 
         div.form-group 
             label(for="isbn") ISBN: 
             input#isbn.form-control(type='text' placeholder='ISBN13' name='isbn' value=(undefined===book ? '' : book.isbn) required='true')
         div.form-group 
             lable Genre: 
             div 
-                for genre in geners 
+                for genre in genres 
                     div(style='display: inline;padding-right: 10px;')
                         input.checkbox-input(type='checkbox'  name='genre'  id=genre._id value=genre._id checked=genre.checked)
                         label(for="genre._id")  #{genre.name}

@@ -27,3 +27,10 @@ block content
                 a(href=val.url) #{val._id} 
         else 
             p there are no copies of this book in the libary
+
+              hr
+    p
+        a(href=book.url+'/delete') Delete Book
+    p
+        a(href=book.url+'/update') Update Book
+
