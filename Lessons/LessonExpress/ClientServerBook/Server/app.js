@@ -1,18 +1,42 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var cors = require("cors");
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var log = require('debug-level').log('app');
+const swaggerUI = require("swagger-ui-express");
+const swaggerJsdoc = require('swagger-jsdoc');
 
+const swaggerURL = process.env.SERVER_URL === undefined ?  "http://localhost:3001" : process.env.SERVER_URL + ":" + process.env.PORT;
+const options = {
+  apis: ['./routes/catalog.js'], // files containing annotations as above
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Hello World',
+      version: '1.0.0',
+    },
+  },
+  dervers:[
+{
+  url: swaggerURL
+}
+  ]
+  
+};
 
+const openapiSpecification = swaggerJsdoc(options);
 
 var app = express();
+app.use(`/${process.env.API_DOCS}`,swaggerUI.serve, swaggerUI.setup(openapiSpecification));
+log.log(`api-docs on: ${swaggerURL}/${process.env.API_DOCS} `)
 //Import the mongoose module
 var mongoose = require('mongoose');
 
 //Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1/AAA';
+var mongoDB =  process.env.MONGODB_URL === undefined ? 'mongodb://127.0.0.1/AAA' :  process.env.MONGODB_URL;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //Get the default connection
@@ -21,13 +45,14 @@ var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open',() => {
-  console.log("Mongoose Db connected")
+  log.log("Mongoose Db connected")
 });
 
 // Routs
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');
+const { loadavg } = require('os');
 
 
 // view engine setup

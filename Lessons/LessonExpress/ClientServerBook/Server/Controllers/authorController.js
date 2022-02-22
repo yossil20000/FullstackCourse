@@ -1,11 +1,14 @@
 var Author = require('../Models/author');
 var Book = require('../Models/book')
 var async = require('async');
+var log = require('debug-level').log('author');
+
 
 var { body,validationResult } = require('express-validator');
 
 // Display list of all Authors.
 exports.author_list = function(req, res, next) {
+    log.info("author_list");
     Author.find()
     .sort([['family_name','ascending']])
     .exec(function(err,list_authors){

@@ -3,9 +3,6 @@ import axios from 'axios';
 //import userItem from "./Models/user.js";
 //import todoitemObj from './Models/todos.js';
 
-const BASE_URL = 'http://127.0.0.1:3000/';
-
-
 
 export const deleteId = async id => {
     try {
