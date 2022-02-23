@@ -24,8 +24,20 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const dropCollection = require('./dropCollection');
-dropCollection(["devicetypes"],mongoDB);
+//dropCollection(["devicetypes"],mongoose);
+let collections = ["devicetypes",'members','devices'];
+let dropCollections = function() {
+    //var collections = _.keys(mongoose.connection.collections)
+    collections.forEach( collectionName => {
+      var collection = mongoose.connection.collections[collectionName]
+      collection.drop(function(err) {
+        if (err && err.message != 'ns not found') console.log("Drop Done:" +err)
+        console.log("Drop Done:" +null)
+      })
+    })
+  } 
 
+dropCollections();
 const devices = []
 const deviceTypes = [];
 const flightReservations =[];
