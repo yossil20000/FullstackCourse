@@ -52,7 +52,8 @@ db.once('open',() => {
 
 var membersRouter = require('./routes/member');
 var deviceRouter = require('./routes/device');
-
+const deviceTypeRouter = require('./routes/deviceType');
+const flightReservRouter = require('./routes/flightReservation');
 const { loadavg } = require('os');
 
 
@@ -68,7 +69,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/members', membersRouter);
 app.use('/devices', deviceRouter);
-
+app.use('/deviceTypes', deviceTypeRouter);
+app.use('/reservation', flightReservRouter);
 //app.use('/db',databaseRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

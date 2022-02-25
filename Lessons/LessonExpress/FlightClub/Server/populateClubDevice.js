@@ -14,6 +14,7 @@ var async = require('async')
 var DeviceType = require('./Models/deviceType')
 var Device = require('./models/device')
 var Member = require('./Models/member')
+var FlightReservation = require('./Models/flightReservation');
 
 var mongoose = require('mongoose');
 var mongoDB = userArgs[0] === undefined ? process.env.MONGODB_URL : userArgs[0];
@@ -25,7 +26,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const dropCollection = require('./dropCollection');
 //dropCollection(["devicetypes"],mongoose);
-let collections = ["devicetypes",'members','devices'];
+let collections = ["devicetypes",'members','devices','flightreservations'];
 let dropCollections = function() {
     //var collections = _.keys(mongoose.connection.collections)
     collections.forEach( collectionName => {

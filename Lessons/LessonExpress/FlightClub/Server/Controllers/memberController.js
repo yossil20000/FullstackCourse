@@ -111,3 +111,29 @@ exports.member_create = [
     }
 
 ];
+exports.members_flights_reserv = function(req,res,next) {
+    
+    try{
+        log.info("members_flights_reserv");
+        Member.find({ flights: { $exists: true, $not: {$size: 0} } })
+        .select('flights')
+        .exec(function(err,list_members){
+            if(err){ return next(err);}
+            log.info(list_members);
+            let data = list_members[0].flights;
+            console.log(data);
+            FlightReservation.find().where('_id').in(data).exec((err, records) => {
+                log.info(records);
+                res.status(202).json({success: true, data: records});
+                return
+            });
+            
+/*             res.status(202).json({success: true, data: list_members});
+            return; */
+        })
+    }
+    catch(err){
+        log.info(err);
+    }
+    
+}

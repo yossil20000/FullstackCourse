@@ -10,6 +10,6 @@ var MemberSchema = new Schema({
     date_of_birth: {type: Date, required: true},
     date_of_join: {type: Date, required: true},
     date_of_leave: {type: Date},
-
+    flights: [{type: Schema.ObjectId,ref: 'Flight'}]
 });
 module.exports = mongoose.model('Member', MemberSchema);

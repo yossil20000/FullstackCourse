@@ -12,6 +12,7 @@ var DeviceSchema = new Schema({
     device_status: {type:String, enum:["IN_SERVICE","OUT_OFSERVICE","MAINTANANCE","NOT_EXIST"], default:"IN_SERVICE"},
     due_date: {type: Date},
     hobbs_meter: {type: Number},
-    engien_meter: {type: Number}
+    engien_meter: {type: Number},
+    flights: [{type: Schema.ObjectId,ref: 'Flight'}]
 });
 module.exports = mongoose.model('Device', DeviceSchema);
