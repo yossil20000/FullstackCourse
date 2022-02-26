@@ -27,15 +27,17 @@ exports.member_delete = function(req,res,next){
     log.info(`member_delete`);
     async.parallel({
         member: function(callback){
-            Member.findById(req.body.memberId).exec(callback);
+            Member.findById(req.params.memberId).exec(callback);
         },
         reservations_member:function(callback){
-            FlightReservation.find({'member': req.body.memberId}).exec(callback);
+            FlightReservation.find({'member': req.params.memberId}).exec(callback);
         }
     }, function(err,results){
         if(err) { return next(err);}
-        if(results.reservations_member > 0){
+        log.info(results.reservations_member);
+        if(results.reservations_member == req.params.memberId){
             res.status(401).json({"success": false,"msg": 'member has link reservation', "data": results.reservations_member })
+            return;
         }
         else{
             Member.findByIdAndRemove(req.params.memberId, function(err,doc){

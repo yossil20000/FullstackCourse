@@ -6,7 +6,7 @@ const Flight = require('../Models/flight');
 const async = require('async');
 const log = require('debug-level').log('flightReservationController');
 
-const {body, validationResult} = require('express-validator');
+const {body, check,validationResult} = require('express-validator');
 const member = require('../Models/member');
 
 exports.reservation_list = function(req,res,next){
@@ -67,9 +67,7 @@ exports.reservation_delete= function(req,res,next){
 		};
 		async.parallel({
 			member_delete_flight: function(callback){
-				Member.findById(req.body.member_id)
-				.updateOne({$pull: {flights: req.body._id}})
-				.exec(callback);
+				Member.findOneAndUpdate(req.body.member_id,{$pull: {flights: req.body._id}}).exec(callback);
 			},
 			device_delete_flight: function(callback){
 				Device.findById(req.body.device_id)
@@ -108,12 +106,21 @@ exports.reservation_delete= function(req,res,next){
 
 
 exports.reservation_create = [
+	
 	body('device_id').trim().isLength({min:1}).escape().withMessage('device_id must be valid'),
 	body('member_id').trim().isLength({min:1}).escape().withMessage('member_id must be valid'),
 	body('date_from','Invalid date_from').trim().isISO8601().toDate(),
-	body('date_to','Invalid date_from').trim().isISO8601().toDate(),
+	body('date_to','Invalid date_to').trim().isISO8601().toDate(),
+	body('date_to','date_to must be greater then date_from').trim().isISO8601().toDate()
+	.custom((value,{req}) => {
+			if((value -  req.body.date_from) > 0) return true;
+			return false;
+	}),
+	
 	(req,res,next) => {
 		log.info(req.body);
+		
+		
 		async.parallel({
 			member: function(callback){
 			Member.findById(req.body.member_id).exec(callback)
@@ -130,6 +137,8 @@ exports.reservation_create = [
 			res.status(401).json({success: false, errors : ["Member or Device Not Exist"], data: results});
 			return;
 		}
+			
+		
 		const errors = validationResult(req);
 		if(!errors.isEmpty())
 		{
@@ -160,4 +169,31 @@ exports.reservation_create = [
 
 
 
+];
+
+exports.reservation_update = [
+	body('date_from','Invalid date_from').trim().isISO8601().toDate(),
+	body('date_to','Invalid date_to').trim().isISO8601().toDate(),
+	body('date_to','date_to must be greater then date_from').trim().isISO8601().toDate()
+	.custom((value,{req}) => {
+			if((value -  req.body.date_from) > 0) return true;
+			return false;
+	}),
+	(req,res,next) => {
+		const errors = validationResult(req);
+		if(!errors.isEmpty())
+		{
+			return res.status(401).json({success: false, errors : errors, data: req.body});
+		}
+		else{
+			FlightReservation.findOneAndUpdate(req.body._id , {date_from: req.body.date_from, date_to: req.body.date_to},(err,results) => {
+				if(err){
+					return res.status(401).json({success: false, errors : err, data: req.body});
+				}
+				else{
+					return res.status(401).json({success: true, errors : [], data: results});
+				}
+			})
+		}
+	}
 ];
