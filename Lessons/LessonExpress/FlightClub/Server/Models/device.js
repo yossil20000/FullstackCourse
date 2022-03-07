@@ -11,8 +11,24 @@ var DeviceSchema = new Schema({
     available: {type: Boolean, default: false},
     device_status: {type:String, enum:["IN_SERVICE","OUT_OFSERVICE","MAINTANANCE","NOT_EXIST"], default:"IN_SERVICE"},
     due_date: {type: Date},
-    hobbs_meter: {type: Number},
-    engien_meter: {type: Number},
-    flights: [{type: Schema.ObjectId,ref: 'Flight'}]
+    hobbs_meter: {type: mongoose.Decimal128},
+    engien_meter: {type: mongoose.Decimal128},
+    maintanance: {
+        type : {type: String, enum:["50hr", "100hr", "Annual"]},
+        next_meter:{type: mongoose.Decimal128}
+    },
+    price:{
+        base: {type: mongoose.Decimal128},
+        meter: {type: String, enum:['HOBBS','ENGIEN']}
+    },
+    description:{
+        image: {type: String},
+        color: {type: String},
+        seats: {type: Number},
+        fuel: {type: Number},
+        instruments: [{type: String, enum:["VFR","IFR","G100","ICE","AIR_CONDITION"]}]
+    },
+    flights: [{type: Schema.ObjectId,ref: 'Flight'}],
+    flight_reserv: [{type: Schema.ObjectId, ref: 'FlightReservation'}]
 });
 module.exports = mongoose.model('Device', DeviceSchema);

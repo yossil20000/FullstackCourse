@@ -4,13 +4,14 @@ const { DataTime } = require('luxon');
 var Schema = mongoose.Schema;
 
 var FlightSchema = new Schema({
-    flight_reservation: {type: Schema.Types.ObjectId, ref: 'FlightReservation' , required: true},
-    hobbs_start: {type: Date },
-    hobbs_stop: {type: Date},
-    engien_start: {type: Date},
-    engien_stop: {type: Date},
-    status: {type: String, enum:["CREATED","OPEN","CLOSE"]}
-
+    
+    hobbs_start: {type: mongoose.Decimal128 },
+    hobbs_stop: {type: mongoose.Decimal128},
+    engien_start: {type: mongoose.Decimal128},
+    engien_stop: {type: mongoose.Decimal128},
+    status: {type: String, enum:["CREATED","OPEN","CLOSE"]},
+    device: {type: Schema.Types.ObjectId, ref: 'Device', required: true},
+    member: {type: Schema.Types.ObjectId, ref: 'FlightReservation' , required: true}
 
 });
 

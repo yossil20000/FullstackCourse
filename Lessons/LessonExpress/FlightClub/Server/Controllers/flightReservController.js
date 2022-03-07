@@ -8,7 +8,21 @@ const log = require('debug-level').log('flightReservationController');
 
 const {body, check,validationResult} = require('express-validator');
 const member = require('../Models/member');
-
+exports.reservation = function(req,res,next) {
+	log.info(`reservation ${req.params._id}`);
+	FlightReservation.findById(req.params._id)
+	.populate('device')
+	.populate('member')
+	.exec((err,results) => {
+		if(err){
+			return res.status(401).json({success: false, errors : ["FlightReservation Not Exist", err], data: results});	
+		}
+		else{
+			res.status(401).json({success: true, errors : [], data: results});
+			return;
+		}
+	});
+};
 exports.reservation_list = function(req,res,next){
 	log.info('reservation_list');
 	FlightReservation.find()
