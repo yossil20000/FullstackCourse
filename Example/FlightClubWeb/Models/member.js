@@ -11,7 +11,7 @@ var MemberSchema = new Schema({
     family_name: {type: String, required: true },
     first_name: {type: String, required: true },
     contact:{
-        address: {
+        billing_address: {
             line1: {type: String},
             line2: {type: String},
             city: {type: String},
@@ -25,13 +25,17 @@ var MemberSchema = new Schema({
             city: {type: String},
             postcode: {type: String},
             province: {type: String},
-            state: {type: String}
+            state: {type: String, uppercase:true}
         },
-        phone: {type: String},
-        email: {type: String, unique:true}
+        phone: {
+            country:{type: String, default: "972"},
+            area: {type: String, default: "054"},
+            number: {type: String, default: ""}
+        },
+        email: {type: String, unique:true, lowercase: true}
     },
-    member_type:{type:String, enum:['Guest','Member']},
-    roll: Roll,
+    member_type:{type:String, enum:['Guest','Member'] , default: 'Guest'},
+    roll: {type: Roll, _id:false} ,
     date_of_birth: {type: Date, required: true},
     date_of_join: {type: Date, required: true},
     date_of_leave: {type: Date},

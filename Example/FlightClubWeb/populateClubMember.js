@@ -16,10 +16,15 @@ var DeviceType = require('./Models/deviceType')
 var Device = require('./models/device')
 var Flight = require('./Models/flight')
 var FlightReservation = require('./Models/flightReservation')
-
-
-
+var Roll = require('./Models/roll');
+const CE = require('./Models/constants');
 var mongoose = require('mongoose');
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+ 
+
 var mongoDB = userArgs[0] === undefined ? process.env.MONGODB_URL : userArgs[0];
 //console.log(mongoDB);
 
@@ -27,16 +32,93 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+let collections = ["devicetypes",'members','devices','flightreservations'];
+
+let dropCollections = function() {
+    //var collections = _.keys(mongoose.connection.collections)
+    collections.forEach( collectionName => {
+      var collection = mongoose.connection.collections[collectionName]
+        console.log(collection);
+      collection.drop(function(err) {
+        if (err && err.message != 'ns not found') console.log("Drop Done:" +err)
+        console.log("Drop Done:" +null)
+      })
+    })
+  } 
 
 
+const devices = []
 var members = []
 var deviceTypes = [];
+function deviceCreate(device_id,device_type,available,device_status,due_date,hobbs_meter, engien_meter, cb){
+    let deviceDetail = {
+        device_id: device_id,
+        device_type: device_type,
+        available: available,
+        device_status: device_status,
+        due_date: due_date,
+        hobbs_meter: hobbs_meter,
+        engien_meter: engien_meter,
+        price: {base: 420.4},
+        hobbs_meter: 345.6,
+        engien_meter: 245.7,
+        maintanance: {next_meter: 5670.6},
+        description: {
+            image:  'https://www.google.com/search?q=airplane+images&sxsrf=APq-WBtm62ecKiz4huAVdDnYbGDgBYIrLw:1647066931349&tbm=isch&source=iu&ictx=1&vet=1&fir=dJ-ns3zOOG2WjM%252C8pJNRpwZOAYayM%252C_%253BeSVzIEk_N-h10M%252CWITfi61mVOl_gM%252C_%253BK8fp99P4ei9q5M%252CfdhhcUCkHFlBVM%252C_%253BRA9DKM8DJ1bucM%252CzUO50cMzwM52bM%252C_%253B9iEF7ZGmZNUHvM%252C_CeaBxaSDKd9FM%252C_%253BYvBvR3ld5lWTvM%252CNZPjaL6BtLrdwM%252C_%253BYyq0M5VdF0FUBM%252CMDPvSWhwOcWPzM%252C_%253B74EO1BkTKAjRTM%252C6YGYLTGE1BuVMM%252C_%253B7F1Qgw4VQpjxUM%252ChbdRpLYBCtxpzM%252C_%253BaqRgmcTxbHGjvM%252CSIsyVKIDS4mSVM%252C_%253BMv_grMNuMngiRM%252Cs6uQndQalu9gwM%252C_%253BWhz34Ns70Sam4M%252C8pJNRpwZOAYayM%252C_&usg=AI4_-kT_yASkbU7xCWtx-7SQ5th5LpOruw&sa=X&sqi=2&ved=2ahUKEwi92_S6-r_2AhUDxhoKHXCQAisQ9QF6BAggEAE#imgrc=eSVzIEk_N-h10M',
+            color: 'Red/White',
+            seats: 4,
+            fuel: {quantity : 50},
+            instruments:['VFR','G1000']
+        }
+    
+        
+    }
+    
+    let device = new Device(deviceDetail);
+    device.save(function(err) {
+        if(err){ cb(err,null); return;}
+        console.log('New Device: ' , device);
+        devices.push(device);
+        cb(null,device);
+    });
 
-function memberCreate(first_name, family_name, d_birth, d_join, memberId, cb) {
-    memberdetail = { first_name: first_name, family_name: family_name, member_id: memberId }
+};
+function createDevice(cb){
+    async.series([
+        function(callback){
+            deviceCreate("4X-CGC",deviceTypes[0],true,"IN_SERVICE",null,4500,3459,callback);
+        },
+        function(callback){
+            deviceCreate("4X-XXX",deviceTypes[1],true,"IN_SERVICE",null,4500,3459,callback);
+        }
+    ],
+    cb);
+};
+const address = {
+    line1: "interna box 248",
+    line2: "",
+    city: "Gilon",
+    postcode: "2010300",
+    province: "Misgav",
+    state: "ISRAEL"
+}
+const rolls = new Roll({
+    rolls: [CE.ROLLS[1], CE.ROLLS[3]]
+});
+function memberCreate(first_name, family_name, d_birth, d_join, memberId,email, cb) {
+    memberdetail = { first_name: first_name, family_name: family_name, member_id: memberId ,
+        contact:{
+            email: email,
+            phone:{number: "9050740"},
+            billing_address: address,
+            shipping_address: address
+
+        },
+        roll: rolls
+        }
     if (d_birth != false) memberdetail.date_of_birth = d_birth
     if (d_join != false) memberdetail.date_of_join = d_join
-
+    
     var member = new Member(memberdetail);
 
     member.save(function (err) {
@@ -52,10 +134,10 @@ function memberCreate(first_name, family_name, d_birth, d_join, memberId, cb) {
 function createMembers(cb) {
     async.series([
         function (callback) {
-            memberCreate("Yosef", "Levy", "1965-08-21", "2011-11-01", "059828392", callback);
+            memberCreate("Yosef", "Levy", "1965-08-21", "2011-11-01", "059828392","yos@gmail.com", callback);
         },
         function (callback) {
-            memberCreate("Giora", "Yahel", "1966-09-22", "2012-12-02", "259828392", callback);
+            memberCreate("Giora", "Yahel", "1966-09-22", "2012-12-02", "259828392", 'yos1@gmail.com', callback);
         }
     ],
         cb
@@ -87,23 +169,40 @@ function createDeviceType(cb){
 }
 
 
-async.series([
-    createMembers,
-    createDeviceType
-],
-    // Optional callback
-    function (err, results) {
-        if (err) {
-            console.log('FINAL ERR: ' + err);
-        }
-        else {
-            console.log('Members: ' + members);
+readline.question(`Do You Want to Delete (YeS)?`, ans => {
+    
+    console.log(`Hi ${ans}!`)
 
-        }
-        // All done, disconnect from database
-        mongoose.connection.close();
-    });
+    if(ans == 'YeS'){
+        
+        dropCollections();
+        async.series([
+            createMembers,
+            createDeviceType,
+            createDevice,
+        ],
+            // Optional callback
+            function (err, results) {
+                if (err) {
+                    console.log('FINAL ERR: ' + err);
+                }
+                else {
+                    console.log('Members: ' + members);
+        
+                }
+                // All done, disconnect from database
+                mongoose.connection.close();
+            });
+        
+        
 
+    }
+    else
+    {
+        throw "Exit";
+    }
+    readline.close();
+  });
 
 
 
