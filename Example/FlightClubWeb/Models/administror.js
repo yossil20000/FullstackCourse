@@ -3,6 +3,6 @@ const { DataTime } = require('luxon');
 
 var Schema = mongoose.Schema;
 
-var AdministratorSchema = new Schema(){
+var AdministratorSchema = new Schema({
     
-}
+});

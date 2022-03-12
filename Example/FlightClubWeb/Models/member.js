@@ -1,8 +1,11 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+
+
+
 const {DateTime} = require('luxon');
 
 var Schema = mongoose.Schema;
-
+const Roll =require('../Models/roll').schema
 var MemberSchema = new Schema({
     member_id: {type: String, required: true },
     family_name: {type: String, required: true },
@@ -27,6 +30,8 @@ var MemberSchema = new Schema({
         phone: {type: String},
         email: {type: String, unique:true}
     },
+    member_type:{type:String, enum:['Guest','Member']},
+    roll: Roll,
     date_of_birth: {type: Date, required: true},
     date_of_join: {type: Date, required: true},
     date_of_leave: {type: Date},
