@@ -105,7 +105,7 @@ const address = {
 const rolls = new Roll({
     rolls: [CE.ROLLS[1], CE.ROLLS[3]]
 });
-function memberCreate(first_name, family_name, d_birth, d_join, memberId,email, cb) {
+function memberCreate(first_name, family_name, d_birth, d_join, memberId,email,password, cb) {
     memberdetail = { first_name: first_name, family_name: family_name, member_id: memberId ,
         contact:{
             email: email,
@@ -114,7 +114,8 @@ function memberCreate(first_name, family_name, d_birth, d_join, memberId,email, 
             shipping_address: address
 
         },
-        roll: rolls
+        roll: rolls,
+        password: password
         }
     if (d_birth != false) memberdetail.date_of_birth = d_birth
     if (d_join != false) memberdetail.date_of_join = d_join
@@ -134,10 +135,10 @@ function memberCreate(first_name, family_name, d_birth, d_join, memberId,email, 
 function createMembers(cb) {
     async.series([
         function (callback) {
-            memberCreate("Yosef", "Levy", "1965-08-21", "2011-11-01", "059828392","yos@gmail.com", callback);
+            memberCreate("Yosef", "Levy", "1965-08-21", "2011-11-01", "059828392","yos@gmail.com", "password1", callback);
         },
         function (callback) {
-            memberCreate("Giora", "Yahel", "1966-09-22", "2012-12-02", "259828392", 'yos1@gmail.com', callback);
+            memberCreate("Giora", "Yahel", "1966-09-22", "2012-12-02", "259828392", 'yos1@gmail.com',"password2", callback);
         }
     ],
         cb

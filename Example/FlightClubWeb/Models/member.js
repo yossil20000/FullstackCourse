@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
+const SALT_WORK_FACTOR = 10;
 
 
 
@@ -32,8 +34,9 @@ var MemberSchema = new Schema({
             area: {type: String, default: "054"},
             number: {type: String, default: ""}
         },
-        email: {type: String, unique:true, lowercase: true}
+        email: {type: String, lowercase: true , index: {unique:true}}
     },
+    password: {type: String, required: true},
     member_type:{type:String, enum:['Guest','Member'] , default: 'Guest'},
     roll: {type: Roll, _id:false} ,
     date_of_birth: {type: Date, required: true},
@@ -41,8 +44,28 @@ var MemberSchema = new Schema({
     date_of_leave: {type: Date},
     flights: [{type: Schema.ObjectId,ref: 'Flight'}],
     flight_reserv: [{type: Schema.ObjectId, ref: 'FlightReservation'}]
+},{timestamps: true});
+
+MemberSchema.pre('save', function(next) { 
+    var user = this;
+
+   if(!user.isModified('passwors')) return next();
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt)  {
+        if(err) return(next(err));
+        bcrypt.hash(user.password, salt, function(err,hash) {
+            if(err) return next(err);
+            user.password = hash;
+            next();
+        });
+    });
 });
 
+MemberSchema.methods.comparePassword = function(candidatePassword, cb){
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch)  {
+        if(err) {return cb(err);}
+        cb(null, isMatch);
+    })
+};
 MemberSchema.virtual('date_of_birth_formatted')
 .get(function () {
     return DateTime.fromJSDate(this.date_of_birth).toLocaleString(DataTime.DATE_MED);
