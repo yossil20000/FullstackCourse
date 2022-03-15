@@ -15,6 +15,7 @@ const deviceTypeRouter = require('./routes/deviceType');
 const flightReservRouter = require('./routes/flightReservation');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -52,6 +53,7 @@ app.use('/members', membersRouter);
 app.use('/devices', deviceRouter);
 app.use('/deviceTypes', deviceTypeRouter);
 app.use('/reservation', flightReservRouter);
+app.use('/',loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

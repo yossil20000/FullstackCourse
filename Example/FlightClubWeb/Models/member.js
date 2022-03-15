@@ -49,7 +49,7 @@ var MemberSchema = new Schema({
 MemberSchema.pre('save', function(next) { 
     var user = this;
 
-   if(!user.isModified('passwors')) return next();
+  // if(!user.isModified('passwors')) return next();
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt)  {
         if(err) return(next(err));
         bcrypt.hash(user.password, salt, function(err,hash) {
@@ -60,25 +60,34 @@ MemberSchema.pre('save', function(next) {
     });
 });
 
+MemberSchema.methods.hash = function(password){
+    return bcrypt.hashSync(password,SALT_WORK_FACTOR);
+}
+
 MemberSchema.methods.comparePassword = function(candidatePassword, cb){
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch)  {
         if(err) {return cb(err);}
         cb(null, isMatch);
     })
 };
+
+MemberSchema.virtual('code_area_phone')
+.get(function() {
+    return `${this.contact.phone.country}${this.contact.phone.area}${this.contact.phone.number}`;
+});
 MemberSchema.virtual('date_of_birth_formatted')
 .get(function () {
-    return DateTime.fromJSDate(this.date_of_birth).toLocaleString(DataTime.DATE_MED);
+    return DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED);
 });
 
 MemberSchema.virtual('date_of_join_formatted')
 .get(function () {
-    return DateTime.fromJSDate(this.date_of_join).toLocaleString(DataTime.DATE_MED);
+    return DateTime.fromJSDate(this.date_of_join).toLocaleString(DateTime.DATE_MED);
 });
 
 MemberSchema.virtual('date_of_leave_formatted')
 .get(function () {
-    return DateTime.fromJSDate(this.date_of_leave).toLocaleString(DataTime.DATE_MED);
+    return DateTime.fromJSDate(this.date_of_leave).toLocaleString(DateTime.DATE_MED);
 });
 
 module.exports = mongoose.model('Member', MemberSchema);
