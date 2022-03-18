@@ -16,7 +16,7 @@ var DeviceType = require('./Models/deviceType')
 var Device = require('./models/device')
 var Flight = require('./Models/flight')
 var FlightReservation = require('./Models/flightReservation')
-var Roll = require('./Models/roll');
+var Role = require('./Models/role');
 const CE = require('./Models/constants');
 var mongoose = require('mongoose');
 const readline = require('readline').createInterface({
@@ -102,8 +102,8 @@ const address = {
     province: "Misgav",
     state: "ISRAEL"
 }
-const rolls = new Roll({
-    rolls: [CE.ROLLS[1], CE.ROLLS[3]]
+const roles = new Role({
+    roles: [CE.ROLES[1], CE.ROLES[3]]
 });
 function memberCreate(first_name, family_name, d_birth, d_join, memberId,email,password, cb) {
     memberdetail = { first_name: first_name, family_name: family_name, member_id: memberId ,
@@ -114,7 +114,7 @@ function memberCreate(first_name, family_name, d_birth, d_join, memberId,email,p
             shipping_address: address
 
         },
-        roll: rolls,
+        role: roles,
         password: password
         }
     if (d_birth != false) memberdetail.date_of_birth = d_birth

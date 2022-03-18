@@ -7,7 +7,7 @@ const SALT_WORK_FACTOR = 10;
 const {DateTime} = require('luxon');
 
 var Schema = mongoose.Schema;
-const Roll =require('../Models/roll').schema
+const Role =require('../Models/role').schema
 var MemberSchema = new Schema({
     member_id: {type: String, required: true },
     family_name: {type: String, required: true },
@@ -34,11 +34,23 @@ var MemberSchema = new Schema({
             area: {type: String, default: "054"},
             number: {type: String, default: ""}
         },
-        email: {type: String, lowercase: true , index: {unique:true}}
+        email: {
+            type: String,
+            lowercase: true ,
+            index: {unique:[true , "email already exist in database"]},
+            trim: true,
+            required: [true,"email not provided"],
+            validate:{
+                validator: function(v){
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+                },
+                message: `{VALUE} is not valid email!`
+            }
+        }
     },
     password: {type: String, required: true},
-    member_type:{type:String, enum:['Guest','Member'] , default: 'Guest'},
-    roll: {type: Roll, _id:false} ,
+    member_type:{type:String, enum:['Normal','Member'] , default: 'Normal'},
+    role: {type: Role, _id:false} ,
     date_of_birth: {type: Date, required: true},
     date_of_join: {type: Date, required: true},
     date_of_leave: {type: Date},
@@ -90,4 +102,8 @@ MemberSchema.virtual('date_of_leave_formatted')
     return DateTime.fromJSDate(this.date_of_leave).toLocaleString(DateTime.DATE_MED);
 });
 
+MemberSchema.virtual('full_name')
+.get(function() {
+    return `${this.family_name } ${this.first_name}`;
+});
 module.exports = mongoose.model('Member', MemberSchema);

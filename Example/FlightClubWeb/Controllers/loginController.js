@@ -3,9 +3,10 @@ const { DataTime, DateTime } = require('luxon');
 const Member = require('../Models/member');
 const log = require('debug-level').log('LoginController');
 const mail = require("../Services/mail");
-var login =  new Map();
 
-exports.login = function(req,res,next){
+const authJWT = require('../middleware/authJWT');
+
+exports.signin = function(req,res,next){
     const email = req.body.email;
     const password = req.body.password;
 
@@ -25,13 +26,30 @@ exports.login = function(req,res,next){
                     
                     console.info(`${email} Access Pemitted`)
                     log.info(`${member.date_of_birth_formatted}`)
-                    return res.status(201).json({ success: true, errors: [], message: "Access Permited" });
+             
+                    const payLoad = authJWT.payload;
+                    payLoad.email = email;
+                    //payLoad.id = member._id;
+                    console.log("payload", payLoad);
+                    const token = authJWT.signToken(payLoad)
+                    return res.status(201).json({
+                        success: true,
+                        errors: [],
+                        data: {
+                            access_token : token,
+                            message: "Access Permited",
+                            member: {
+                                email: member.contact.email,
+                                fullName: member.full_name}} });
                     
                 }
                 else{
                     console.info(`${email}  Access Denied ElseIf`)
                     log.info(member);
-                    return res.status(401).json({ success: true, errors: [], message: "Access Denied" });
+                    return res.status(401).json({
+                         success: true,
+                         errors: [],
+                         message: "Access Denied" });
                 }
 
             })
@@ -65,7 +83,10 @@ exports.reset = function(req,res,next){
                else{
                    mail.SendMail(member.email,"Test", `Your temporary paassword is ${password}`).then((result) => {
                     console.log("Send Mail");
-                    return res.status(201).json({ success: true, errors: [], message: password });
+                    return res.status(201).json(
+                        { success: true,
+                          errors: [],
+                          message: password });
                    }
                     
                    ).catch((error => {
