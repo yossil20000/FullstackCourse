@@ -12,7 +12,7 @@ exports.signin = function(req,res,next){
 
     log.info(`login: ${email} `);
    
-    Member.findOne({email: email}, (err, member) => {
+    Member.findOne({"contact.email" : email}, (err, member) => {
         if(err){
             console.info(`${email} Access Denied ${err}`)
         }
@@ -29,6 +29,7 @@ exports.signin = function(req,res,next){
              
                     const payLoad = authJWT.payload;
                     payLoad.email = email;
+                    payLoad.userId = member._id;
                     //payLoad.id = member._id;
                     console.log("payload", payLoad);
                     const token = authJWT.signToken(payLoad);
@@ -70,7 +71,8 @@ exports.signin = function(req,res,next){
 exports.reset = function(req,res,next){
     const email = req.body.email;
     const phone = req.body.phone;
-    Member.findOne({email: email,code_area_phone:phone }, (err, member) => {
+    console.log(email,phone);
+    Member.findOne({"contact.email" : email}, (err, member) => {
         if(err){
             console.info(`${email} Not Found ${err}`)
             return res.status(401).json({ success: false, errors: err, message: `${email} Not Found` });
@@ -80,14 +82,15 @@ exports.reset = function(req,res,next){
             log.info(`phone: ${member.code_area_phone}`)
             var password = passwordGenrator(8);
             member.password = member.hash(password);
-           Member.updateOne({email: email}, {password: member.password}).exec((err, result) => {
+           member.updateOne({password: member.password}).exec((err, result) => {
                if(err){
                 console.log("Update Mail Failed", err);
                 return  res.status(401).json({ success: false, errors: err, message: password });
                }
-               else{
-                   mail.SendMail(member.email,"Test", `Your temporary paassword is ${password}`).then((result) => {
-                    console.log("Send Mail");
+               else if(result){
+                   console.log("result", result)
+                   mail.SendMail(member.contact.email,"Test", `Your temporary paassword is ${password}`).then((result) => {
+                    console.log("Send Mail to:", member.contact.email);
                     return res.status(201).json(
                         { success: true,
                           errors: [],

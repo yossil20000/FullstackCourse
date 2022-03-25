@@ -135,10 +135,10 @@ function memberCreate(first_name, family_name, d_birth, d_join, memberId,email,p
 function createMembers(cb) {
     async.series([
         function (callback) {
-            memberCreate("Yosef", "Levy", "1965-08-21", "2011-11-01", "059828392","yos@gmail.com", "password1", callback);
+            memberCreate("Yosef", "Levy", "1965-08-21", "2011-11-01", "059828392","yos1@gmail.com", "password1", callback);
         },
         function (callback) {
-            memberCreate("Giora", "Yahel", "1966-09-22", "2012-12-02", "259828392", 'yos1@gmail.com',"password2", callback);
+            memberCreate("Giora", "Yahel", "1966-09-22", "2012-12-02", "259828392", 'yos2@gmail.com',"password2", callback);
         }
     ],
         cb

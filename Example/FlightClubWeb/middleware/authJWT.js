@@ -2,7 +2,8 @@ const JWT = require('jsonwebtoken');
 const Member = require('../Models/member');
 const jwtService = require('../Services/jwtService');
 const payload = {
-    email: ""
+    email: "",
+    userId:""
    };
 // SIGNING OPTIONS
 const signOptions = {
@@ -41,7 +42,7 @@ const verifyToken = (req, res, next) => {
                 next();
             }
             else{
-                console.log(decode.email);
+                console.log(decode);
                 Member.findOne({'contact.email' : decode.email})
                 .exec((err, user) => {
                     if(err){
