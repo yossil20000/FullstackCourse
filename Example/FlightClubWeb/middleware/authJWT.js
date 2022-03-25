@@ -1,6 +1,6 @@
 const JWT = require('jsonwebtoken');
 const Member = require('../Models/member');
-
+const jwtService = require('../Services/jwtService');
 const payload = {
     email: ""
    };
@@ -14,8 +14,8 @@ const signOptions = {
    };
 const signToken = function(payLoad){
     const token = JWT.sign(payLoad, process.env.JWT_SECRET,signOptions);
-    const verify = JWT.verify(token, process.env.JWT_SECRET);
-    console.log("token_then_verify" , verify);
+    //const verify = JWT.verify(token, process.env.JWT_SECRET);
+    //console.log("token_then_verify" , verify);
     return token;
 }
 const verifyToken = (req, res, next) => {

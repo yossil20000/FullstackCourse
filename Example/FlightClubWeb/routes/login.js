@@ -2,8 +2,10 @@ var express = require('express');
 var router = express.Router();
 var loginController = require('../Controllers/loginController');
 const authJWT = require('../middleware/authJWT');
-router.post('/login', loginController.signin);
-router.post('/reset', loginController.reset);
+
+router.put('/login', loginController.signin);
+router.put('/logout',)
+router.put('/reset_password', loginController.reset);
 router.get('/hidden', authJWT.verifyToken, function(req,res,next) {
 
     if(!res.user){
@@ -18,6 +20,7 @@ router.get('/hidden', authJWT.verifyToken, function(req,res,next) {
 router.get('/hidden/:token', authJWT.verifyToken, function(req,res,next) {
 
     if(!res.user){
+
         res.status(403).json(
             { success: false, errors: ["Invalid User token"], data: [] }
         )

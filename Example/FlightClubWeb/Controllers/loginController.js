@@ -2,8 +2,8 @@ const { body } = require('express-validator');
 const { DataTime, DateTime } = require('luxon');
 const Member = require('../Models/member');
 const log = require('debug-level').log('LoginController');
-const mail = require("../Services/mail");
-
+const mail = require("../Services/mailService");
+const jwtService = require('../Services/jwtService');
 const authJWT = require('../middleware/authJWT');
 
 exports.signin = function(req,res,next){
@@ -31,12 +31,17 @@ exports.signin = function(req,res,next){
                     payLoad.email = email;
                     //payLoad.id = member._id;
                     console.log("payload", payLoad);
-                    const token = authJWT.signToken(payLoad)
+                    const token = authJWT.signToken(payLoad);
+                    const decodeJWT = jwtService.decodeJWT(token);
+                    console.log("tokenExp" , decodeJWT.exp);
                     return res.status(201).json({
                         success: true,
                         errors: [],
                         data: {
                             access_token : token,
+                            exp: decodeJWT.exp,
+                            iat: new Date(decodeJWT.iat * 1000),
+                            expDate: new Date(decodeJWT.exp*1000),
                             message: "Access Permited",
                             member: {
                                 email: member.contact.email,

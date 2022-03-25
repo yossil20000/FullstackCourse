@@ -121,7 +121,13 @@ exports.members_flights_reserv = function(req,res,next) {
         .select('flights')
         .exec(function(err,list_members){
             if(err){ return next(err);}
-            log.info(list_members);
+            if(list_members.length == 0)
+            {
+                res.status(202).json({success: true, data: []});
+                return;
+            }
+            log.info("list_members",list_members);
+
             let data = list_members[0].flights;
             console.log(data);
             FlightReservation.find().where('_id').in(data).exec((err, records) => {
@@ -136,6 +142,7 @@ exports.members_flights_reserv = function(req,res,next) {
     }
     catch(err){
         log.info(err);
+        res.status(401).json({success: false, data: []});
     }
     
 }

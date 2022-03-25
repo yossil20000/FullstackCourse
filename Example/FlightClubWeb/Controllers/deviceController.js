@@ -30,9 +30,14 @@ exports.device_reservation = function (req, res, next) {
             .exec(function (err, list_members) {
                 if (err) {
                     log.error(err);
-                    return next(err);
+                    res.status(401).json({ success: false, data: [] });
+                    return ;
                 }
                 log.info(list_members);
+                if (list_members.length == 0) {
+                    res.status(202).json({ success: true, data: [] });
+                    return;
+                }
                 let data = list_members[0].flights;
                 console.log(data);
                 FlightReservation.find().where('_id').in(data).populate('member').exec((err, records) => {

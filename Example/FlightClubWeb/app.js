@@ -20,7 +20,8 @@ var loginRouter = require('./routes/login');
 var app = express();
 
 //Import the mongoose module
-var mongoose = require('mongoose');
+var db = require('./database/database');
+/* var mongoose = require('mongoose');
 
 //Set up default mongoose connection
 var mongoDB =  process.env.MONGODB_URL === undefined ? 'mongodb://127.0.0.1/AAA' :  process.env.MONGODB_URL;
@@ -33,7 +34,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open',() => {
   log.log("Mongoose Db connected")
-});
+}); */
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -70,5 +71,31 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+var userArgs = process.argv.slice(2);
+console.log(userArgs);
+const loadApi = require("./loadApi");
+const { dbs } = require('./database/database');
+if(userArgs[0] == "yossi" )
+{
+  console.log(userArgs[0]);
+   loadApi(process.env.LOAD_API_ADDRESS).then(function(res) {
+    console.log('Sync result:', res);
+    
+    res.forEach((element,index) => {
+      console.log(`${index}`);
+      console.log(element);
+     db.collection("cripto").insertOne(element);
+    });
+    
+  }
+    
+  );
+  
+/*   (async function main() {
+    var result = await loadApi(process.env.LOAD_API_ADDRESS);
+    
+  
+    console.log('async result:', result);
+})() */
+}
 module.exports = app;
