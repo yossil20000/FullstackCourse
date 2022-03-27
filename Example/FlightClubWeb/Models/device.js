@@ -20,7 +20,7 @@ var DeviceSchema = new Schema({
     },
     price:{
         base: {type: mongoose.Decimal128},
-        meter: {type: String, enum:[CE.DEVICE_MET[0],CE.DEVICE_MET[1]], default:CE.DEVICE_MET[1]}
+        meter: {type: String, enum:[CE.DEVICE_MET.HOBBS,CE.DEVICE_MET.ENGIEN], default:CE.DEVICE_MET[1]}
     },
     description:{
         image: {type: String},
@@ -30,8 +30,9 @@ var DeviceSchema = new Schema({
             quantity: {type: Number},
             units: {type:String, enum:['galon','litter'] , default:'galon'}
         },
-        instruments: [{type: String, enum:[CE.DEVICE_INS[0],CE.DEVICE_INS[1],CE.DEVICE_INS[2],CE.DEVICE_INS[3],CE.DEVICE_INS[4]]}]
+        instruments: [{type: String, enum:[CE.DEVICE_INS.VFR,CE.DEVICE_INS.IFR,CE.DEVICE_INS.G1000,CE.DEVICE_INS.ICE,CE.DEVICE_INS.AIR_CONDITION]}]
     },
+    location_zone:{type: String, default: "Asia/Jerusalem"},
     can_reservs:[{type: Schema.ObjectId, ref: 'Member'}],
     flights: [{type: Schema.ObjectId,ref: 'Flight'}],
     flight_reservs: [{type: Schema.ObjectId, ref: 'FlightReservation'}]

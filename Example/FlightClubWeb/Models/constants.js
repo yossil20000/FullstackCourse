@@ -14,10 +14,10 @@ const DEVICE_MT={
     0:"50hr", 1:"100hr",2:"Annual"
 }
 const DEVICE_MET = {
-    0:'HOBBS',1:'ENGIEN'
+    HOBBS:'HOBBS',ENGIEN:'ENGIEN'
 }
 const DEVICE_INS = {
-    0:"VFR",1:"IFR",2:"G1000",3:"ICE",4:"AIR_CONDITION"
+    VFR:"VFR",IFR:"IFR",G1000:"G1000",ICE:"ICE",AIR_CONDITION:"AIR_CONDITION"
 }
 module.exports.ROLES = ROLES;
 module.exports.DEVICE_STATUS = DEVICE_STATUS;

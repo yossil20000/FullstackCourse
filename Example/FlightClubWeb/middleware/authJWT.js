@@ -3,7 +3,8 @@ const Member = require('../Models/member');
 const jwtService = require('../Services/jwtService');
 const payload = {
     email: "",
-    userId:""
+    userId:"",
+    roles:[]
    };
 // SIGNING OPTIONS
 const signOptions = {
@@ -19,7 +20,7 @@ const signToken = function(payLoad){
     //console.log("token_then_verify" , verify);
     return token;
 }
-const verifyToken = (req, res, next) => {
+const authenticate = (req, res, next) => {
     const token = req.body.token.replace('Bearer ', '')
     const tokenH = req.headers.token.replace('Bearer ', '');
     console.log(req.headers.token , 'tokenH');
@@ -43,15 +44,15 @@ const verifyToken = (req, res, next) => {
             }
             else{
                 console.log(decode);
-                Member.findOne({'contact.email' : decode.email})
+                Member.findById(decode.userId)
                 .exec((err, user) => {
                     if(err){
-                        console.log(err);
+                        console.log("findOne error:",err);
                         res.status(500).json({ success: false, errors: [err], data: [] });
                     }
                     else{
-                        console.log(user);
-                        res.user = user;
+                        console.log("findOne:",user);
+                        req.user = decode;
                         next();
                     }
                 })
@@ -66,7 +67,7 @@ const verifyToken = (req, res, next) => {
 };
 
 module.exports ={
-    verifyToken: verifyToken,
+    authenticate: authenticate,
     signToken: signToken,
     signOptions: signOptions,
     payload: payload

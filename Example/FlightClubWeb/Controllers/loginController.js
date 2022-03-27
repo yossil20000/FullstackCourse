@@ -29,9 +29,10 @@ exports.signin = function(req,res,next){
              
                     const payLoad = authJWT.payload;
                     payLoad.email = email;
-                    payLoad.userId = member._id;
+                    payLoad.userId = member._id.toString();
+                    payLoad.roles = member.role.roles;
                     //payLoad.id = member._id;
-                    console.log("payload", payLoad);
+                    console.log("signein payload", payLoad);
                     const token = authJWT.signToken(payLoad);
                     const decodeJWT = jwtService.decodeJWT(token);
                     console.log("tokenExp" , decodeJWT.exp);

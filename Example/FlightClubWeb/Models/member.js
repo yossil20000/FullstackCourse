@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+const Role =require('../Models/role').schema
+
 const SALT_WORK_FACTOR = 10;
 
 
@@ -7,7 +9,6 @@ const SALT_WORK_FACTOR = 10;
 const {DateTime} = require('luxon');
 
 var Schema = mongoose.Schema;
-const Role =require('../Models/role').schema
 var MemberSchema = new Schema({
     member_id: {type: String, required: true },
     family_name: {type: String, required: true },
@@ -55,7 +56,8 @@ var MemberSchema = new Schema({
     date_of_join: {type: Date, required: true},
     date_of_leave: {type: Date},
     flights: [{type: Schema.ObjectId,ref: 'Flight'}],
-    flight_reserv: [{type: Schema.ObjectId, ref: 'FlightReservation'}]
+    flight_reserv: [{type: Schema.ObjectId, ref: 'FlightReservation'}],
+    membership: {type: Schema.ObjectId,ref: 'Membership'}
 },{timestamps: true});
 
 MemberSchema.pre('save', function(next) { 
