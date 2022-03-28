@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 const Role =require('../Models/role').schema
 

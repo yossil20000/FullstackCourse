@@ -11,14 +11,15 @@ if (!userArgs[0].startsWith('mongodb')) {
 }
 */
 var async = require('async')
-var Member = require('./Models/member')
+var Member = require('./Models/member');
+const Membership = require('./Models/membership');
 var DeviceType = require('./Models/deviceType')
 var Device = require('./models/device')
 var Flight = require('./Models/flight')
 var FlightReservation = require('./Models/flightReservation')
 var Role = require('./Models/role');
 const CE = require('./Models/constants');
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
@@ -50,6 +51,26 @@ let dropCollections = function() {
 const devices = []
 var members = []
 var deviceTypes = [];
+const memberships = [];
+function membershipCreate(entry_price,rank,cb){
+   
+    let detail = {
+        entry_price: entry_price,
+        rank: rank
+    }
+    let membership = new Membership(detail);
+    membership.save((err) => {
+        if(err){
+            return cb(err,null);
+        }
+        else{
+            console.log('New membership: ' , membership);
+            memberships.push(membership);
+            cb(null,membership);
+        }
+
+    }) 
+}
 function deviceCreate(device_id,device_type,available,device_status,due_date,hobbs_meter, engien_meter, cb){
     let deviceDetail = {
         device_id: device_id,
@@ -105,7 +126,8 @@ const address = {
 const roles = new Role({
     roles: [CE.ROLES[1], CE.ROLES[3]]
 });
-function memberCreate(first_name, family_name, d_birth, d_join, memberId,email,password, cb) {
+function memberCreate(first_name, family_name, d_birth, d_join, memberId,email,password,membership ,cb) {
+    let memberShip = new Membership();
     memberdetail = { first_name: first_name, family_name: family_name, member_id: memberId ,
         contact:{
             email: email,
@@ -115,7 +137,8 @@ function memberCreate(first_name, family_name, d_birth, d_join, memberId,email,p
 
         },
         role: roles,
-        password: password
+        password: password,
+        membership: membership
         }
     if (d_birth != false) memberdetail.date_of_birth = d_birth
     if (d_join != false) memberdetail.date_of_join = d_join
@@ -132,13 +155,24 @@ function memberCreate(first_name, family_name, d_birth, d_join, memberId,email,p
         cb(null, member)
     });
 }
+function createMemberships(cb){
+    async.series([
+        function(callback){
+            membershipCreate(21000,"Silver",callback);
+        },
+        function(callback){
+            membershipCreate(22000,"Gold",callback);
+        }
+    ],cb
+    );
+}
 function createMembers(cb) {
     async.series([
         function (callback) {
-            memberCreate("Yosef", "Levy", "1965-08-21", "2011-11-01", "059828392","yos1@gmail.com", "password1", callback);
+            memberCreate("Yosef", "Levy", "1965-08-21", "2011-11-01", "059828392","yos1@gmail.com", "password1",memberships[0], callback);
         },
         function (callback) {
-            memberCreate("Giora", "Yahel", "1966-09-22", "2012-12-02", "259828392", 'yos2@gmail.com',"password2", callback);
+            memberCreate("Giora", "Yahel", "1966-09-22", "2012-12-02", "259828392", 'yos2@gmail.com',"password2", memberships[1],callback);
         }
     ],
         cb
@@ -178,6 +212,7 @@ readline.question(`Do You Want to Delete (YeS)?`, ans => {
         
         dropCollections();
         async.series([
+            createMemberships,
             createMembers,
             createDeviceType,
             createDevice,

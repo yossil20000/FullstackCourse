@@ -16,7 +16,7 @@ const flightReservRouter = require('./routes/flightReservation');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
-
+const membershipRouter = require('./routes/membership');
 var app = express();
 
 //Import the mongoose module
@@ -55,6 +55,7 @@ app.use('/devices', deviceRouter);
 app.use('/deviceTypes', deviceTypeRouter);
 app.use('/reservation', flightReservRouter);
 app.use('/',loginRouter);
+app.use('/memberships', membershipRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
