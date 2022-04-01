@@ -1,0 +1,54 @@
+import logo from './logo.svg';
+import './App.css';
+import ClipLoader from "react-spinners/ClipLoader";
+import { css } from "@emotion/react";
+import Child from './Components/Child/Child';
+import {useState} from 'react'
+
+
+function App() {
+
+   const func =()=>{
+      value++
+      console.log(value)
+   }
+
+   let value = 8
+  
+   const [counterA,setCounterA] = useState(0)
+   const [counterB,setCounterB] = useState(0)
+   
+
+
+   console.log("render app")
+  return (
+    <div>
+       {`this is counter a: ${counterA}`}
+       <button onClick={()=>{
+         setCounterA(prevState => prevState+1)} 
+         }
+         >
+         click me
+       </button>
+       <br />
+       {`this is counter b: ${counterB}`}
+
+       <button onClick={()=>{
+         setCounterB(prevState => prevState+1)} 
+         }
+         >
+         click me
+       </button>
+       <br />
+       {value}
+       <button onClick={func} >
+         click me
+       </button>
+       <Child />
+    </div>
+  );
+}
+
+export default App;
+example with array
+export default App;]
