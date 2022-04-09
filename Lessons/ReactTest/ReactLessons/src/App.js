@@ -9,6 +9,7 @@ import Welccome from './Componnets/Wellcome';
 import { useState } from 'react';
 console.log("Render App");
 function App() {
+
   const dataFromParent = "Data From App";
 
   const info = { name: "Yoss", id: 1 };

@@ -19,7 +19,7 @@ const child = (props) => {
         }
         </ul>
         <hr></hr>
-        //Conditional Rendering
+        {/* Conditional Rendering */}
         <h2>Conditional Rendering</h2>
         <div>
           { condition ? <h4>Condition True</h4> : <h4>Condition False</h4>}
