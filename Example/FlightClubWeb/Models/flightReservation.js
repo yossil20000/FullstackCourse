@@ -17,7 +17,7 @@ var FlightReservationSchema = new Schema({
 FlightReservationSchema
 .virtual('date_from_formatted')
 .get(function () {
-    return DateTime.fromJSDate(this.date_from).toLocaleString(DataTime.DATE_MED);
+    return DateTime.fromJSDate(this.date_from).toLocaleString(DateTime.DATE_MED);
 });
 
 FlightReservationSchema
