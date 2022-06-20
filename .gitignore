@@ -1260,3 +1260,13 @@ Lessons/LessonExpress/ClientServer/Client/node_modules/
 Lessons/LessonExpress/ClientServer/Client/dist/
 
 Lessons/LessonExpress/ClientServer/Server/node_modules/
+
+Lessons/LessonExpress/ClientServerBook/Server/node_modules/
+
+Lessons/LessonExpress/ClientServerBook/Server/.env
+
+Lessons/LessonExpress/FlightClub/Server/node_modules/
+
+Example/FlightClubWeb/node_modules/
+
+Example/FlightClubWeb/.env
