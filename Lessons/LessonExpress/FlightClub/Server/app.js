@@ -30,8 +30,8 @@ const options = {
 const openapiSpecification = swaggerJsdoc(options);
 
 var app = express();
-app.use(`/${process.env.API_DOCS}`,swaggerUI.serve, swaggerUI.setup(openapiSpecification));
-log.log(`api-docs on: ${swaggerURL}/${process.env.API_DOCS} `)
+//app.use(`/${process.env.API_DOCS}`,swaggerUI.serve, swaggerUI.setup(openapiSpecification));
+//log.log(`api-docs on: ${swaggerURL}/${process.env.API_DOCS} `)
 //Import the mongoose module
 var mongoose = require('mongoose');
 
@@ -49,7 +49,7 @@ db.once('open',() => {
 });
 
 // Routs
-
+var viewsRouter = require('./routes/viewsRouter');
 var membersRouter = require('./routes/member');
 var deviceRouter = require('./routes/device');
 const deviceTypeRouter = require('./routes/deviceType');
@@ -57,9 +57,9 @@ const flightReservRouter = require('./routes/flightReservation');
 const { loadavg } = require('os');
 
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+
+
+
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
@@ -67,6 +67,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// ejs
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use('/', viewsRouter);
 app.use('/members', membersRouter);
 app.use('/devices', deviceRouter);
 app.use('/deviceTypes', deviceTypeRouter);

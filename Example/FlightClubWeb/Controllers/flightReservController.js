@@ -77,7 +77,7 @@ exports.reservation_delete= function(req,res,next){
 		body("device_id").trim().isLength({min:1}).withMessage("device_id must be specified");
 		const errors = validationResult(req);
 		if(!errors.isEmpty()) {
-			return res.status(401).json({success: false, errors : err, data: []});
+			return res.status(401).json({success: false, errors : errors, data: []});
 		};
 		async.parallel({
 			member_delete_flight: function(callback){
@@ -91,16 +91,16 @@ exports.reservation_delete= function(req,res,next){
 
 		}, function(err,results){
 			if(err){
-				res.status(401).json({success: false, errors : err, data: results});		
+				res.status(401).json({success: false, errors:[err], data: results});		
 				return;
 			}
 			else{
 				FlightReservation.findByIdAndDelete(req.body._id, (err,doc) => {
 					if(err){
-						res.status(401).json({success: false, errors : err, data: doc});
+						res.status(401).json({success: false, errors:[err], data: doc});
 					}
 					else{
-						res.status(201).json({success: true, errors : err, data: doc});
+						res.status(201).json({success: true, errors:[err], data: doc});
 					}
 					return;
 				})
@@ -114,7 +114,7 @@ exports.reservation_delete= function(req,res,next){
 	catch(err){
 		log.log(err);
 		return next(err);
-		res.status(401).json({success: false, errors : err, data: []});
+		res.status(401).json({success: false, errors:[err], data: []});
 	}
 }
 
@@ -202,10 +202,10 @@ exports.reservation_update = [
 		else{
 			FlightReservation.findOneAndUpdate(req.body._id , {date_from: req.body.date_from, date_to: req.body.date_to},(err,results) => {
 				if(err){
-					return res.status(401).json({success: false, errors : err, data: req.body});
+					return res.status(401).json({success: false, errors:[err], data: req.body});
 				}
 				else{
-					return res.status(401).json({success: true, errors : [], data: results});
+					return res.status(201).json({success: true, errors : [], data: results});
 				}
 			})
 		}

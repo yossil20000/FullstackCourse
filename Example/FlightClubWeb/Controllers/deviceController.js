@@ -30,12 +30,12 @@ exports.device_reservation = function (req, res, next) {
             .exec(function (err, list_members) {
                 if (err) {
                     log.error(err);
-                    res.status(401).json({ success: false, data: [] });
+                    res.status(401).json({ success: false,errors: [err], data: [] });
                     return ;
                 }
                 log.info(list_members);
                 if (list_members.length == 0) {
-                    res.status(202).json({ success: true, data: [] });
+                    res.status(202).json({ success: true, errors: [],data: [] });
                     return;
                 }
                 let data = list_members[0].flights;
@@ -43,11 +43,11 @@ exports.device_reservation = function (req, res, next) {
                 FlightReservation.find().where('_id').in(data).populate('member').exec((err, records) => {
                     log.info(records);
                     if (err) {
-                        res.status(401).json({ success: false, errors: err, data: records });
+                        res.status(401).json({ success: false, errors:[err], data: records });
                         return
                     }
                     else {
-                        res.status(202).json({ success: true, data: records });
+                        res.status(202).json({ success: true,errors:[], data: records });
                         return
                     }
                 });

@@ -1,0 +1,11 @@
+
+<%- include('./partial/layout') %>
+    <%- include('./partial/navbar') %>
+    <h1><%= header %></h1>
+    <span>Name: <% arr[0].name %></span>
+    <% console.log(arr) %>
+    <% for(let i=0; i < arr.length;i++){ %>
+        <span>Name: <%= arr[i].age %></span>
+    <% } %>
+</body>
+</html>

@@ -54,8 +54,8 @@ exports.signin = function(req,res,next){
                     console.info(`${email}  Access Denied ElseIf`)
                     log.info(member);
                     return res.status(401).json({
-                         success: true,
-                         errors: [],
+                         success: false,
+                         errors: ["Accss Denied"],
                          message: "Access Denied" });
                 }
 
@@ -63,7 +63,7 @@ exports.signin = function(req,res,next){
         }
         else
         {
-            return res.status(401).json({ success: true, errors: [], message: "Access Denied" });
+            return res.status(401).json({ success: false, errors: ["Access Denied"], message: "Access Denied" });
         }
         
     })
@@ -76,7 +76,7 @@ exports.reset = function(req,res,next){
     Member.findOne({"contact.email" : email}, (err, member) => {
         if(err){
             console.info(`${email} Not Found ${err}`)
-            return res.status(401).json({ success: false, errors: err, message: `${email} Not Found` });
+            return res.status(401).json({ success: false, errors:[err], message: `${email} Not Found` });
         }
         if(member)
         {
@@ -98,9 +98,9 @@ exports.reset = function(req,res,next){
                           message: password });
                    }
                     
-                   ).catch((error => {
+                   ).catch((err => {
                     console.log("Send Mail");
-                    return res.status(201).json({ success: false, errors: error, message: password });
+                    return res.status(201).json({ success: false, errors:[err], message: password });
                    })
 
                    );
@@ -113,7 +113,7 @@ exports.reset = function(req,res,next){
         
         else
         {
-            return res.status(401).json({ success: false, errors: err, message: `${email} Not Found` });
+            return res.status(401).json({ success: false, errors:[err], message: `${email} Not Found` });
         }
 })
 }

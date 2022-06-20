@@ -60,7 +60,7 @@ exports.deviceType_update = [
         else {
             DeviceType.findById(req.body._id, (err, results) => {
                 if (err  ) {
-                    res.status(401).json({ success: false, errors: err, data: [] });
+                    res.status(401).json({ success: false, errors:[err], data: [] });
                     return;
                 }
                 if(!results){
@@ -73,7 +73,7 @@ exports.deviceType_update = [
                 results.class.surface = req.body.class.surface;
                 results.description = req.body.description === undefined ? results.description : req.body.description;
                 results.save();
-                res.status(201).json({ success: true, errors: ["Find"], data: results });
+                res.status(201).json({ success: true, errors: [], data: results });
                 return;
             });
 
@@ -107,7 +107,7 @@ exports.deviceType_create = [
             })
             newDeviceType.save((err, result) => {
                 if (err) { return next(err); }
-                res.status(401).json({ success: true, errors: errors, data: result });
+                res.status(401).json({ success: true, errors:[err], data: result });
                 return;
             });
         }

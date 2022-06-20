@@ -10,11 +10,11 @@ exports.membership_list = function(req,res,next){
     Membership.find()
     .exec(function(err,list_memberships) {
         if(err){
-            res.status(401).json({success: false, errors : err, data: []});
+            res.status(401).json({success: false, errors :[err], data: []});
             return;
         }
         else{
-            res.status(201).json({success: true, errors : err, data: list_memberships})
+            res.status(201).json({success: true, errors:[], data: list_memberships})
         }
     })
 }

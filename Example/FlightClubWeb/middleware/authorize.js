@@ -15,11 +15,11 @@ function authorize(roles = []){
             if(found)
             {return next();}
             else{
-                return res.status(401).json({ message: 'Unauthorized' });
+                return res.status(401).json({success: false, errors :['Unauthorized'], data: []});
             }
         }
         else{
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({success: false, errors :['Unauthorized'], data: []});
         }
     };
 }

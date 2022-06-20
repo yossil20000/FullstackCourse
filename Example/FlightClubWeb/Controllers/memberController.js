@@ -12,7 +12,7 @@ exports.member_list = function(req,res,next){
     .sort([['family_name','ascending']])
     .exec(function(err,list_members){
         if(err){ return next(err);}
-        res.status(201).json(list_members);
+        res.status(201).json({success: false, errors : errors = [], data: list_members});
     })
 }
 exports.member_detail = function(req,res,next){
@@ -20,7 +20,7 @@ exports.member_detail = function(req,res,next){
     Member.findById(req.params.id)
         .exec(function(err,member){
             if(err) {return next(err);}
-            res.status(201).json(member);
+            res.status(201).json({success: false, errors :  [], data: member});
         });
 }
 exports.member_delete = function(req,res,next){
@@ -36,13 +36,13 @@ exports.member_delete = function(req,res,next){
         if(err) { return next(err);}
         log.info(results.reservations_member);
         if(results.reservations_member == req.params.memberId){
-            res.status(401).json({"success": false,"msg": 'member has link reservation', "data": results.reservations_member })
+            res.status(401).json({success: false, errors : ["member has link reservation"], data: results.reservations_member})
             return;
         }
         else{
             Member.findByIdAndRemove(req.params.memberId, function(err,doc){
                 if(err) { return next(err);}
-                res.status(201).json(doc);
+                res.status(201).json({success: false, errors : ["member has link reservation"], data: doc });
             });
         }
     });
@@ -107,7 +107,7 @@ exports.member_create = [
             );
             member.save((err) => {
                 if(err) { return next(err);}
-                res.status(201).json({success: true, data: member});
+                res.status(201).json({success: true,errors:[], data: member});
             });
         }
     }
@@ -123,7 +123,7 @@ exports.members_flights_reserv = function(req,res,next) {
             if(err){ return next(err);}
             if(list_members.length == 0)
             {
-                res.status(202).json({success: true, data: []});
+                res.status(202).json({success: true, errord:[],data: []});
                 return;
             }
             log.info("list_members",list_members);
@@ -132,7 +132,7 @@ exports.members_flights_reserv = function(req,res,next) {
             console.log(data);
             FlightReservation.find().where('_id').in(data).exec((err, records) => {
                 log.info(records);
-                res.status(202).json({success: true, data: records});
+                res.status(202).json({success: true,errors:[], data: records});
                 return
             });
             
@@ -142,7 +142,7 @@ exports.members_flights_reserv = function(req,res,next) {
     }
     catch(err){
         log.info(err);
-        res.status(401).json({success: false, data: []});
+        res.status(401).json({success: false, errors:[err],data: []});
     }
     
 }

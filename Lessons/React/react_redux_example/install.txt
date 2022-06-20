@@ -1,0 +1,14 @@
+npm i npm install styled-components
+npm i --save-dev @types/styled-components
+tailwind:
+https://tailwindcss.com/docs/guides/create-react-app
+
+
+
+npm i --save-dev @types/styled-components
+From shay sarussi to Everyone 09:51 PM
+https://github.com/ShaySarussiElshten/react-typescript
+From Me to Everyone 09:57 PM
+https://tailwindcss.com/docs/guides/create-react-app
+From shay sarussi to Everyone 09:57 PM
+typescript
